@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Pages privées / fonctionnelles : pas d'intérêt pour un moteur de recherche
+Disallow: /pages/fanclub/community/community/login.html
+Disallow: /pages/fanclub/community/admin/
+
+Sitemap: https://www.teamreynolds.club/sitemap.xml

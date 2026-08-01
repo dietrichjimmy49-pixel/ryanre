@@ -1,0 +1,530 @@
+/* ===========================================================================
+   RYAN REYNOLDS FAN CLUB — MEMBERS DIRECTORY
+   ---------------------------------------------------------------------------
+   tokens.css + shell.css + components.css chargés avant ce fichier.
+   Auparavant : 3 fichiers (Phase 2 layout / Phase 3 thème / Phase 4
+   responsive) pour cette seule page, avec son propre sidebar et son propre
+   mécanisme de tiroir — les deux vivent maintenant dans shell.css et sont
+   partagés par les 4 pages. Il ne reste ici que le contenu propre à
+   l'annuaire : barre d'outils, statistiques, grille de membres.
+   ========================================================================= */
+
+/* --------------------------------------------------------------------------
+   0. DEUX VUES, UN SEUL PARENT FLEX
+   #directory-view et #member-detail-view remplacent ce qui était upo la
+   liste directe des enfants de .app-main : elles doivent donc reproduire
+   son rythme vertical (gap: 40px) pour leurs propres enfants.
+   -------------------------------------------------------------------------- */
+
+#directory-view {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   1. EN-TÊTE DE PAGE + BARRE D'OUTILS
+   -------------------------------------------------------------------------- */
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toolbar__search-field {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar__search-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.toolbar__search-input {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  color: var(--color-paper);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.toolbar__search-input:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.toolbar__search-input::placeholder {
+  color: var(--color-paper-45);
+}
+
+/* Filtre et tri sont de vrais <select> (fonctionnels), habillés pour
+   rester visuellement identiques à un .toolbar__button. */
+.toolbar__button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 32px 0 16px;
+  white-space: nowrap;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c8880' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.toolbar__button:hover,
+.toolbar__button:focus-visible {
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+/* #member-filter et #member-sort sont de vrais <select> stylés comme des
+   .toolbar__button. Sans ceci, la liste déroulée native peut ignorer le
+   fond sombre du select fermé et retomber sur un fond clair par défaut
+   du navigateur/OS tout en gardant un texte clair : illisible. */
+.toolbar__button option {
+  background-color: var(--color-surface-raised);
+  color: var(--color-paper);
+}
+
+/* --------------------------------------------------------------------------
+   2. STATISTIQUES DE LA COMMUNAUTÉ
+   -------------------------------------------------------------------------- */
+
+.community-stats__list {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1 1 0;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.stat-card__icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-accent);
+}
+
+.stat-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.stat-card__icon--online {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pastille "en ligne" : point vert avec halo, sémantique distincte de
+   l'accent or (statut temps réel, pas identité de marque) */
+.stat-card__icon--online::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-online);
+  box-shadow: 0 0 12px 2px rgba(59, 165, 93, 0.5);
+}
+
+.stat-card__value {
+  font-size: clamp(20px, 1rem + 1vw, 24px);
+  font-weight: 600;
+  color: var(--color-paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-card__label {
+  font-size: 11px;
+  color: var(--color-paper-45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   3. ANNUAIRE DES MEMBRES
+   -------------------------------------------------------------------------- */
+
+/* Espace entre le titre "Members Directory" (+ compteur) et la grille
+   de membres qui suit : le rythme vertical de .app-main (gap: 40px) ne
+   s'applique qu'entre sections de premier niveau, pas ici. */
+.members-directory .section-heading {
+  margin-bottom: 24px;
+}
+
+.member-directory-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.member-directory-list__item {
+  min-width: 0;
+}
+
+.member-directory-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px;
+  transition: border-color var(--transition-fast);
+}
+
+.member-directory-card:hover {
+  border-color: var(--color-accent-border);
+}
+
+.member-directory-card__avatar-wrap {
+  margin-bottom: 4px;
+}
+
+.member-directory-card__name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.member-directory-card__country {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.member-directory-card__country,
+.member-directory-card__meta,
+.member-directory-card__favorite,
+.member-directory-card__bio {
+  font-size: 12px;
+  color: var(--color-paper-45);
+}
+
+.member-directory-card__favorite {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.member-directory-card__favorite-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color-accent);
+}
+
+.member-directory-card__favorite-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.member-directory-card__bio {
+  flex: 1 1 auto;
+}
+
+.member-directory-card__link {
+  margin-top: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: color var(--transition-fast);
+}
+
+.member-directory-card__link:hover {
+  color: var(--color-accent-hover);
+}
+
+.section-heading__count {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-paper-45);
+}
+
+.member-directory-empty {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--color-paper-45);
+}
+
+/* --------------------------------------------------------------------------
+   4. VUE PROFIL — fusionnée depuis profil-view.css : le clic sur "View
+      Public Profile" ne navigue plus vers une page séparée, il bascule
+      cette vue à la place de la grille (voir members-directory.js).
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   4. POPUP DE PROFIL — s'ouvre par-dessus la grille de membres (qui reste
+      visible et assombrie en arrière-plan) au lieu de remplacer la page.
+      Fermeture par la croix, par un clic à l'extérieur, ou Échap.
+   -------------------------------------------------------------------------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-overlay);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 72px 24px;
+  overflow-y: auto;
+  background-color: rgba(13, 13, 13, 0.72);
+  backdrop-filter: blur(3px);
+  animation: modal-overlay-fade var(--transition-fast);
+}
+
+.modal-overlay[hidden] { display: none; }
+
+.modal-panel {
+  position: relative;
+  z-index: var(--z-modal);
+  width: 100%;
+  max-width: 680px;
+  margin: auto;
+  animation: modal-panel-rise var(--transition-base);
+}
+
+.modal-close {
+  position: absolute;
+  z-index: 1;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  color: var(--color-paper-72);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+  transform: scale(1.06);
+}
+
+.modal-close svg { width: 15px; height: 15px; }
+
+body.modal-open { overflow: hidden; }
+
+@keyframes modal-overlay-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-panel-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 560px) {
+  .modal-overlay { padding: 48px 16px; }
+  .modal-close { top: -12px; right: 2px; }
+}
+
+.profile-header {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+}
+
+.profile-header__body {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.profile-header__identity {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-header__info {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-header__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  letter-spacing: 0.01em;
+}
+
+.profile-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-paper-45);
+}
+
+.profile-header__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-header__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-header__bio {
+  max-width: 60ch;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-paper-72);
+}
+
+.profile-header__actions {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   4. RESPONSIVE — propre à cette page
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .toolbar__search-field {
+    flex-basis: 100%;
+  }
+
+  .toolbar__button {
+    flex: 1 1 auto;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .profile-header__actions {
+    flex-basis: 100%;
+  }
+
+  /* Annuaire : 2 colonnes en tablette — 4 deviennent trop étroites */
+  .member-directory-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  /* Statistiques : carrousel tactile plutôt qu'une rangée compressée
+     CORRIGÉ (nouvelle passe) — trois soucis remontés en usage réel avec
+     le réglage précédent (scroll-snap-type: proximity + touch-action: pan-x) :
+     1. "Revient en arrière" au moindre swipe léger : le snap-point le
+        plus proche restait la carte de départ tant que le geste ne
+        franchissait pas son seuil de gravité, donnant une sensation de
+        perte de contrôle plutôt qu'un simple ajustement. Le scroll-snap
+        est retiré : le carrousel suit désormais le doigt au pixel près,
+        sans ressort ni retour arrière.
+     2. touch-action: pan-x indiquait au navigateur de ne gérer QUE le
+        panning horizontal sur ce conteneur — un swipe vertical démarré
+        sur les cartes de stats ne faisait donc plus défiler la page.
+        pan-x pan-y autorise les deux axes : le geste horizontal reste
+        capté par le carrousel, mais un scroll vertical n'est plus bloqué.
+     3. Scrollbar native masquée (elle apparaissait en bas du bloc sur
+        certains navigateurs) : le swipe tactile reste pleinement
+        fonctionnel, seule la barre visuelle est retirée. */
+  .community-stats__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .community-stats__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stat-card {
+    flex: 0 0 76%;
+  }
+
+  /* Annuaire : lecture séquentielle verticale */
+  .member-directory-list {
+    grid-template-columns: 1fr;
+  }
+
+  .member-directory-card__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .stat-card {
+    flex-basis: 58%;
+  }
+}
+
+@media (max-width: 430px) {
+  .community-stats__list .stat-card {
+    flex-basis: 80%;
+  }
+}
+
+@media (max-width: 375px) {
+  .community-stats__list .stat-card {
+    flex-basis: 90%;
+  }
+}

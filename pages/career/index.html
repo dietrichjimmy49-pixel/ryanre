@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="google" content="notranslate">
+  <title>Ryan Reynolds - Career</title>
+  <meta name="description" content="A fan-made tribute exploring Ryan Reynolds' career: featured productions, filmography timeline, awards, creative partnerships, and entrepreneurial ventures.">
+  <meta name="theme-color" content="#0d0d0d">
+
+  <!-- Anti-FOUC: arms .jsready before first paint so .reveal elements
+       (hidden only under .jsready, see base.css) never flash visible
+       then hidden while career.js is still loading (deferred). -->
+  <script>document.documentElement.classList.add('jsready');</script>
+
+  <!-- Open Graph / Twitter Card — social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ryan Reynolds Fan Community">
+  <meta property="og:title" content="Ryan Reynolds - Career | Fan Tribute Site">
+  <meta property="og:description" content="A journey through storytelling: films, partnerships, and projects that have shaped a career built on creativity, humor, and heart. An unofficial fan tribute.">
+  <meta property="og:image" content="https://www.teamreynolds.club/assets/images/shared/logo.png">
+  <meta property="og:url" content="https://www.teamreynolds.club/career">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ryan Reynolds - Career | Fan Tribute Site">
+  <meta name="twitter:description" content="A journey through storytelling: films, partnerships, and projects that have shaped a career built on creativity, humor, and heart. An unofficial fan tribute.">
+  <meta name="twitter:image" content="/assets/images/career/career-hero-img.png">
+  <!-- Demo URL — replace with the real domain once deployed. -->
+  <link rel="canonical" href="https://www.teamreynolds.club/career">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Titan+One&display=swap" rel="stylesheet">
+
+  <!-- Hero background (set in CSS, invisible to the preload scanner
+       otherwise) is this page's LCP candidate — preloaded explicitly. -->
+  <link rel="preload" as="image" href="/assets/images/career/career-hero-img.png" fetchpriority="high">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="stylesheet" href="/styles/career/style.css">
+
+</head>
+<body>
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+  <header class="header">
+    <a href="/" class="logo" aria-label="Ryan Reynolds - Home">
+      <span class="logo-text" aria-hidden="true">RYAN REYN</span><span class="logo-o" aria-hidden="true"><img src="/assets/images/shared/avatar.jpg" alt="" width="32" height="32" decoding="async"></span><span class="logo-text" aria-hidden="true">LDS</span>
+    </a>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary navigation">
+      <a href="/" class="nav-link">HOME</a>
+      <span class="nav-dot" aria-hidden="true">•</span>
+      <a href="/pages/about/index.html" class="nav-link">ABOUT</a>
+      <span class="nav-dot" aria-hidden="true">•</span>
+      <a href="/pages/career/index.html" class="nav-link" aria-current="page">CAREER</a>
+      <span class="nav-dot" aria-hidden="true">•</span>
+      <a href="/pages/gallery/index.html" class="nav-link">GALLERY</a>
+      <span class="nav-dot" aria-hidden="true">•</span>
+      <a href="/pages/fanclub/index.html" class="nav-link">FAN CLUB</a>
+
+      <a href="/pages/fanclub/index.html" class="btn btn--primary nav-cta">JOIN THE FAN CLUB</a>
+    </nav>
+
+    <a href="/pages/fanclub/index.html" class="btn btn--primary btn-header">JOIN THE FAN CLUB</a>
+
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </header>
+
+  <div class="nav-backdrop" data-nav-backdrop></div>
+
+  <main>
+    <!-- =========================================================
+        HERO — CAREER PAGE — plein écran (100vh)
+    ========================================================== -->
+    <section class="hero" id="career-hero" aria-label="Career introduction">
+      <div class="hero__media" role="img" aria-label="Ryan Reynolds on set"></div>
+
+      <div class="hero__inner container">
+        <div class="hero__content">
+
+          <div class="hero__eyebrow-row">
+            <p class="hero__eyebrow">Three decades on screen</p>
+          </div>
+
+          <h1 class="hero__title">
+            <span class="hero__title-line hero__title-line--outline">THE</span>
+            <span class="hero__title-line hero__title-line--solid">CAREER</span>
+          </h1>
+
+          <p class="hero__description">40+ film &amp; TV credits, countless roles, one relentless drive.</p>
+
+          <div class="hero__actions">
+            <a href="#productions" class="btn btn--primary">VIEW FILMOGRAPHY</a>
+            <a href="#timeline" class="btn btn--secondary">EXPLORE THE TIMELINE</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+        CAREER OVERVIEW
+    ============================================ -->
+    <section class="overview" aria-labelledby="overview-heading">
+      <div class="container overview__inner">
+        <p class="eyebrow reveal">Career Overview</p>
+        <h2 class="section-title reveal" id="overview-heading">The Evolution of a Storyteller</h2>
+        <p class="section-lead reveal">
+          Ryan Reynolds' career reflects three decades of versatility,
+          resilience, and reinvention. From his early days on Canadian
+          television to becoming one of the industry's most recognizable
+          comedic and action leads, Ryan has built a body of work that spans
+          genres, formats, and global audiences. Known for his wit, charm, and
+          sharp storytelling instincts, he continues to push creative
+          boundaries both in front of and behind the camera.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+            FEATURED PRODUCTIONS
+    ============================================ -->
+    <section class="productions" id="productions" aria-labelledby="productions-heading">
+      <div class="container">
+        <p class="eyebrow eyebrow--center reveal">The Filmography</p>
+        <h2 class="section-title section-title--center reveal" id="productions-heading">Featured Productions</h2>
+
+        <ul class="productions__grid">
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-6yjw51teiz/b0670d-deadpool-wolverine_v_fr.png?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Deadpool & Wolverine movie poster" loading="eager" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2024</span>
+              <h3 class="production-card__title">Deadpool & Wolverine</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Wade Wilson / Deadpool</p>
+              <p class="production-card__desc">
+                The Merc with a Mouth teams up with a reluctant Wolverine across the multiverse.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-gz7dsyt6g6/33cd6a-blue-compagnie_v_fr.png?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="IF movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2024</span>
+              <h3 class="production-card__title">IF</h3>
+              <p class="production-card__meta">Family / Fantasy</p>
+              <p class="production-card__role">Role: Cal</p>
+              <p class="production-card__desc">
+                A man who can see imaginary friends helps a young girl reunite IFs with new kids.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-ra5ztfk2vl/15c39c-freeguy_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Free Guy movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2021</span>
+              <h3 class="production-card__title">Free Guy</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Guy</p>
+              <p class="production-card__desc">
+                A bank teller discovers he's a background character in an
+                open-world video game.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-9mtcpeohim/3f7011-hitman-bodyguard2_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Hitman's Wife's Bodyguard movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2021</span>
+              <h3 class="production-card__title">Hitman's Wife's Bodyguard</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Michael Bryce</p>
+              <p class="production-card__desc">
+                Bodyguard Michael Bryce is pulled back into chaos by his hitman clients.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="/assets/images/career/red-notice.png" alt="Red Notice movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2021</span>
+              <h3 class="production-card__title">Red Notice</h3>
+              <p class="production-card__meta">Action / Thriller</p>
+              <p class="production-card__role">Role: Nolan Booth</p>
+              <p class="production-card__desc">
+                An Interpol agent must team up with the world's most wanted
+                art thief.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-iw1znnw6ny/803612-lescrood2_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="The Croods: A New Age movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2020</span>
+              <h3 class="production-card__title">The Croods: A New Age</h3>
+              <p class="production-card__meta">Animation / Adventure</p>
+              <p class="production-card__role">Role: Voice of Guy</p>
+              <p class="production-card__desc">
+                The Croods encounter a more "evolved" family and must learn to coexist.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-kkv49hm6th/588c81-fast-furious-h-s_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Fast & Furious Presents: Hobbs & Shaw movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2019</span>
+              <h3 class="production-card__title">Hobbs & Shaw</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Locke</p>
+              <p class="production-card__desc">
+                A scene-stealing cameo as the CIA handler who drags Hobbs into the mission.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-ut3anmdd9j/054168-pokemondetectivepikachu_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Pokémon Detective Pikachu movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2019</span>
+              <h3 class="production-card__title">Pokémon Detective Pikachu</h3>
+              <p class="production-card__meta">Family / Mystery</p>
+              <p class="production-card__role">Role: Voice of Detective Pikachu</p>
+              <p class="production-card__desc">
+                A wisecracking Pikachu teams up with a young man to solve his father's disappearance.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="/assets/images/career/6-underground.png" alt="6 Underground movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2019</span>
+              <h3 class="production-card__title">6 Underground</h3>
+              <p class="production-card__meta">Action / Thriller</p>
+              <p class="production-card__role">Role: Six</p>
+              <p class="production-card__desc">
+                A billionaire recruits a team for high-stakes missions only
+                they can pull off.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-qecuzhdfzg/e0311c-deadpool2_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Deadpool 2 movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2018</span>
+              <h3 class="production-card__title">Deadpool 2</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Wade Wilson / Deadpool</p>
+              <p class="production-card__desc">
+                Deadpool assembles X-Force to protect a young mutant from Cable.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-jsulfvj9ab/9e7620-hitman-bodyguard_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="The Hitman's Bodyguard movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2017</span>
+              <h3 class="production-card__title">The Hitman's Bodyguard</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Michael Bryce</p>
+              <p class="production-card__desc">
+                An executive protection agent must keep a notorious hitman alive to testify.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-z4vg72cepb/3d59d3-lifeorigineinconnue_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Life movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2017</span>
+              <h3 class="production-card__title">Life</h3>
+              <p class="production-card__meta">Sci-Fi / Horror</p>
+              <p class="production-card__role">Role: Roy Adams</p>
+              <p class="production-card__desc">
+                An ISS crew discovers a fast-evolving Martian life form aboard their station.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-mflbugep4s/322095-deadpool_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Deadpool movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2016</span>
+              <h3 class="production-card__title">Deadpool</h3>
+              <p class="production-card__meta">Action / Comedy</p>
+              <p class="production-card__role">Role: Wade Wilson / Deadpool</p>
+              <p class="production-card__desc">
+                A wisecracking anti-hero who breaks the fourth wall and box
+                office records.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-mep50nnh14/18c64d-lafemmeautableau_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Woman in Gold movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2015</span>
+              <h3 class="production-card__title">Woman in Gold</h3>
+              <p class="production-card__meta">Drama</p>
+              <p class="production-card__role">Role: Randol Schoenberg</p>
+              <p class="production-card__desc">
+                A young lawyer helps an elderly woman reclaim art the Nazis stole from her family.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-j1i7j6zv6i/0f9a6c-thevoices_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="The Voices movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2015</span>
+              <h3 class="production-card__title">The Voices</h3>
+              <p class="production-card__meta">Dark Comedy / Thriller</p>
+              <p class="production-card__role">Role: Jerry Hickfang</p>
+              <p class="production-card__desc">
+                A seemingly friendly factory worker hears his pets talking him into very bad decisions.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-8nh42mb63j/84c4da-ripd_v_fr.png?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="R.I.P.D. movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2013</span>
+              <h3 class="production-card__title">R.I.P.D.</h3>
+              <p class="production-card__meta">Action / Fantasy</p>
+              <p class="production-card__role">Role: Nick Walker</p>
+              <p class="production-card__desc">
+                A slain cop joins an undead police force that polices the afterlife.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-nqj0mz7102/8e8b25-lescroods_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="The Croods movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2013</span>
+              <h3 class="production-card__title">The Croods</h3>
+              <p class="production-card__meta">Animation / Adventure</p>
+              <p class="production-card__role">Role: Voice of Guy</p>
+              <p class="production-card__desc">
+                A prehistoric family's journey to a new home is guided by a clever wanderer.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-w818x1n7ag/93fb41-turbo_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Turbo movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2013</span>
+              <h3 class="production-card__title">Turbo</h3>
+              <p class="production-card__meta">Animation / Comedy</p>
+              <p class="production-card__role">Role: Voice of Skidmark</p>
+              <p class="production-card__desc">
+                A garden snail dreams of racing in the Indianapolis 500 after a freak accident.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-9iikwunbgi/b2dae6-securiterapprochee_v_fr.png?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Safe House movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2012</span>
+              <h3 class="production-card__title">Safe House</h3>
+              <p class="production-card__meta">Action / Thriller</p>
+              <p class="production-card__role">Role: Matt Weston</p>
+              <p class="production-card__desc">
+                A young CIA agent must protect a rogue operative under siege at a safe house.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-oqfzn272eb/c902bd-greenlantern_v_fr.jpeg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="Green Lantern movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2011</span>
+              <h3 class="production-card__title">Green Lantern</h3>
+              <p class="production-card__meta">Action / Superhero</p>
+              <p class="production-card__role">Role: Hal Jordan</p>
+              <p class="production-card__desc">
+                A test pilot is chosen to wield an alien ring that grants extraordinary power.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-zrcgni17q3/6a89fe-echangestandard_v_fr.png?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="The Change-Up movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2011</span>
+              <h3 class="production-card__title">The Change-Up</h3>
+              <p class="production-card__meta">Comedy</p>
+              <p class="production-card__role">Role: Dave Lockwood</p>
+              <p class="production-card__desc">
+                Two best friends magically swap lives and learn to appreciate what they had.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="/assets/images/career/buried.png" alt="Buried movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2010</span>
+              <h3 class="production-card__title">Buried</h3>
+              <p class="production-card__meta">Thriller</p>
+              <p class="production-card__role">Role: Paul Conroy</p>
+              <p class="production-card__desc">
+                A gripping, one-man performance in a race against time.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-vlkc92gy8c/3a939e-xmen-ow_v_fr.png?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="X-Men Origins: Wolverine movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2009</span>
+              <h3 class="production-card__title">X-Men Origins: Wolverine</h3>
+              <p class="production-card__meta">Action / Adventure</p>
+              <p class="production-card__role">Role: Wade Wilson</p>
+              <p class="production-card__desc">
+                Reynolds' first turn as Wade Wilson, years before Deadpool got his own film.
+              </p>
+            </div>
+          </li>
+
+          <li class="production-card reveal">
+            <div class="production-card__media">
+              <img class="production-card__poster" src="https://i.pathehome.com/product/fr/phf-5qg12ysr9c/c0e897-laproposition_v_fr.jpg?w=272&auto=format&crop=top%2Cleft&fit=crop&q=45" alt="The Proposal movie poster" loading="lazy" decoding="async">
+            </div>
+            <div class="production-card__body">
+              <span class="production-card__year">2009</span>
+              <h3 class="production-card__title">The Proposal</h3>
+              <p class="production-card__meta">Romance / Comedy</p>
+              <p class="production-card__role">Role: Andrew Paxton</p>
+              <p class="production-card__desc">
+                A high-powered executive and her assistant strike a deal to
+                avoid deportation.
+              </p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+          FILMOGRAPHY TIMELINE
+    ============================================ -->
+    <section class="timeline" id="timeline" aria-labelledby="timeline-heading">
+      <div class="container">
+        <p class="eyebrow eyebrow--center reveal">The Journey</p>
+        <h2 class="section-title section-title--center reveal" id="timeline-heading">Filmography Timeline</h2>
+
+        <ol class="timeline__list">
+
+          <li class="timeline__item timeline__item--left reveal reveal--left">
+            <div class="timeline__media">
+              <img class="timeline__photo" src="/assets/images/career/early-beginnings.png" alt="Ryan Reynolds in his early acting years" loading="lazy" decoding="async">
+            </div>
+            <div class="timeline__content">
+              <span class="timeline__years">1991–1997</span>
+              <h3 class="timeline__title">Early Beginnings</h3>
+              <p class="timeline__desc">
+                Starting out on the Canadian teen drama Hillside (aired in the
+                U.S. as Fifteen), Ryan's early television roles laid the
+                foundation for a career in entertainment.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item timeline__item--right reveal reveal--right">
+            <div class="timeline__content">
+              <span class="timeline__years">1998–2005</span>
+              <h3 class="timeline__title">Building Experience</h3>
+              <p class="timeline__desc">
+                A lead role on the sitcom Two Guys and a Girl gave way to
+                breakout film roles in Van Wilder, Blade: Trinity, and The
+                Amityville Horror, showcasing his range across comedy and
+                genre film.
+              </p>
+            </div>
+            <div class="timeline__media">
+              <img class="timeline__photo" src="/assets/images/career/building-experience.png" alt="Ryan Reynolds in Van Wilder era" loading="lazy" decoding="async">
+            </div>
+          </li>
+
+          <li class="timeline__item timeline__item--left reveal reveal--left">
+            <div class="timeline__media">
+              <img class="timeline__photo" src="/assets/images/career/breakthrough-roles.png" alt="Ryan Reynolds in The Proposal" loading="lazy" decoding="async">
+            </div>
+            <div class="timeline__content">
+              <span class="timeline__years">2005–2010</span>
+              <h3 class="timeline__title">Breakthrough Roles</h3>
+              <p class="timeline__desc">
+                The Proposal became a box-office hit, while the tense,
+                one-location thriller Buried earned some of the strongest
+                reviews of his career, together proving his range.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item timeline__item--right reveal reveal--right">
+            <div class="timeline__content">
+              <span class="timeline__years">2011–2015</span>
+              <h3 class="timeline__title">Expanding Horizons</h3>
+              <p class="timeline__desc">
+                A commercially mixed period spanning the big-budget Green
+                Lantern and the comedy The Change-Up, which nonetheless
+                expanded his range and set the stage for the reinvention to
+                come.
+              </p>
+            </div>
+            <div class="timeline__media">
+              <img class="timeline__photo" src="/assets/images/career/expanding-horizons.png" alt="Ryan Reynolds in Green Lantern" loading="lazy" decoding="async">
+            </div>
+          </li>
+
+          <li class="timeline__item timeline__item--left reveal reveal--left">
+            <div class="timeline__media">
+              <img class="timeline__photo" src="/assets/images/career/global-superstar.png" alt="Ryan Reynolds as Deadpool" loading="lazy" decoding="async">
+            </div>
+            <div class="timeline__content">
+              <span class="timeline__years">2016–Present</span>
+              <h3 class="timeline__title">Global Superstar</h3>
+              <p class="timeline__desc">
+                Deadpool became a record-breaking hit for an R-rated film,
+                launching a run of blockbusters, entrepreneurial ventures, and
+                a distinct comedic brand that reshaped his career.
+              </p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+        AWARDS & RECOGNITION
+    ============================================ -->
+    <section class="awards" id="awards" aria-labelledby="awards-heading">
+      <div class="container">
+        <p class="eyebrow eyebrow--center reveal">Industry Honors</p>
+        <h2 class="section-title section-title--center reveal" id="awards-heading">Awards &amp; Recognition</h2>
+
+        <ul class="awards__grid">
+
+          <li class="stat-card reveal">
+            <span class="stat-card__icon stat-card__icon--trophy" aria-hidden="true">🏆</span>
+            <span class="stat-card__label">Primetime Emmy Awards</span>
+            <span class="stat-card__number">2</span>
+            <p class="stat-card__desc">For producing Welcome to Wrexham</p>
+          </li>
+
+          <li class="stat-card reveal">
+            <span class="stat-card__icon stat-card__icon--star" aria-hidden="true">★</span>
+            <span class="stat-card__label">Golden Globe &amp; Grammy Nods</span>
+            <span class="stat-card__number">3</span>
+            <p class="stat-card__desc">For his Deadpool performance and soundtrack work</p>
+          </li>
+
+          <li class="stat-card reveal">
+            <span class="stat-card__icon stat-card__icon--laurel" aria-hidden="true">🏵</span>
+            <span class="stat-card__label">People's Choice Awards</span>
+            <span class="stat-card__number">3+</span>
+            <p class="stat-card__desc">Fan-voted honors across multiple ceremonies</p>
+          </li>
+
+          <li class="stat-card reveal">
+            <span class="stat-card__icon stat-card__icon--crown" aria-hidden="true">♛</span>
+            <span class="stat-card__label">Special Honors</span>
+            <span class="stat-card__number">Walk of Fame</span>
+            <p class="stat-card__desc">Hollywood star (2017), plus civic honors including the Order of Canada</p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+        ENTREPRENEURIAL VENTURES
+    ============================================ -->
+    <section class="ventures" id="ventures" aria-labelledby="ventures-heading">
+      <div class="container">
+        <div class="ventures__inner">
+
+          <div class="ventures__content reveal reveal--left">
+            <div class="ventures__eyebrow-row">
+              <p class="eyebrow">Beyond the screen</p>
+            </div>
+            <h2 class="section-title" id="ventures-heading">Entrepreneurial Ventures</h2>
+            <p class="section-lead">
+              From spirits to wireless to football, Ryan Reynolds has built a
+              reputation for turning marketing into entertainment, and
+              entertainment into thriving businesses.
+            </p>
+
+            <div class="ventures__features">
+              <div class="feature">
+                <span class="feature__icon">✦</span>
+                <h3 class="feature__title">Aviation American Gin</h3>
+                <p class="feature__desc">Co-owned the award-winning spirits brand from 2018 until its 2020 sale to Diageo, and remains its creative director, known for its irreverent ad campaigns.</p>
+              </div>
+              <div class="feature">
+                <span class="feature__icon">✦</span>
+                <h3 class="feature__title">Mint Mobile</h3>
+                <p class="feature__desc">Turned a wireless carrier into a viral marketing phenomenon before its acquisition by T-Mobile.</p>
+              </div>
+              <div class="feature">
+                <span class="feature__icon">✦</span>
+                <h3 class="feature__title">Wrexham AFC</h3>
+                <p class="feature__desc">Co-owner of the historic Welsh football club, documented in the hit series Welcome to Wrexham.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ventures__media reveal reveal--right">
+            <img class="ventures__photo" src="/assets/images/career/aviation-gin.png" alt="Aviation American Gin bar setting" loading="lazy" decoding="async">
+            <span class="ventures__media-tag">AVIATION AMERICAN GIN</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+        CAREER BY NUMBERS
+    ============================================ -->
+    <section class="stats" aria-labelledby="stats-heading">
+      <div class="container">
+        <p class="eyebrow eyebrow--center reveal">The Numbers</p>
+        <h2 class="section-title section-title--center reveal" id="stats-heading">Career by Numbers</h2>
+
+        <ul class="stats__grid">
+          <li class="stat reveal">
+            <span class="stat__number">40+</span>
+            <span class="stat__label">Productions</span>
+            <span class="stat__desc">Film, TV &amp; Digital Projects</span>
+          </li>
+          <li class="stat reveal">
+            <span class="stat__number">30+</span>
+            <span class="stat__label">Years</span>
+            <span class="stat__desc">In Entertainment</span>
+          </li>
+          <li class="stat reveal">
+            <span class="stat__number stat__number--serif">Millions</span>
+            <span class="stat__label">Viewers</span>
+            <span class="stat__desc">Around the World</span>
+          </li>
+          <li class="stat reveal">
+            <span class="stat__number stat__number--serif">Global</span>
+            <span class="stat__label">Recognition</span>
+            <span class="stat__desc">Across Continents</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+        QUOTE
+    ============================================ -->
+    <section class="quote" aria-label="Ryan Reynolds quote">
+      <div class="quote__media">
+        <img class="quote__photo" src="/assets/images/shared/editorial-bg.png" alt="" loading="lazy" decoding="async">
+      </div>
+
+      <div class="container quote__inner reveal">
+        <p class="quote__text">
+          "I'm always terrified at the beginning. Then I start working and
+          get past my fear, which is the real win for me."
+        </p>
+        <p class="quote__author">Ryan Reynolds</p>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+        EXPLORE MORE
+    ============================================ -->
+    <section class="explore" id="explore" aria-labelledby="explore-heading">
+      <div class="container">
+        <p class="eyebrow eyebrow--center reveal">Continue Exploring</p>
+        <h2 class="section-title section-title--center reveal" id="explore-heading">Explore More</h2>
+
+        <div class="explore__grid">
+
+          <div class="explore-card reveal">
+            <a href="/pages/about/index.html" class="explore-card__link">
+              <div class="explore-card__media">
+                <img src="/assets/images/career/about.png" alt="Ryan Reynolds portrait" loading="lazy" decoding="async">
+              </div>
+              <h3 class="explore-card__title">About Ryan</h3>
+              <p class="explore-card__desc">The story behind the actor, producer and entrepreneur.</p>
+              <span class="explore-card__arrow">→</span>
+            </a>
+          </div>
+
+          <div class="explore-card reveal">
+            <a href="/pages/gallery/index.html" class="explore-card__link">
+              <div class="explore-card__media">
+                <img src="/assets/images/career/gallery.png" alt="Photo gallery preview" loading="lazy" decoding="async">
+              </div>
+              <h3 class="explore-card__title">Gallery</h3>
+              <p class="explore-card__desc">Photoshoots, red carpets and behind-the-scenes moments.</p>
+              <span class="explore-card__arrow">→</span>
+            </a>
+          </div>
+
+          <div class="explore-card reveal">
+            <a href="/#fan-club" class="explore-card__link">
+              <div class="explore-card__media">
+                <img src="/assets/images/career/fan-club.png" alt="Fan club community preview" loading="lazy" decoding="async">
+              </div>
+              <h3 class="explore-card__title">Fan Club</h3>
+              <p class="explore-card__desc">Join the community and get exclusive access.</p>
+              <span class="explore-card__arrow">→</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- =========================================================
+      FOOTER
+  ========================================================== -->
+  <footer class="site-footer">
+    <div class="site-footer__container">
+
+      <div class="site-footer__top">
+
+        <a href="/" class="site-footer__logo" aria-label="Ryan Reynolds - Home">
+          <span class="site-footer__logo-text">Ryan Reynolds</span>
+        </a>
+
+        <nav class="site-footer__nav" aria-label="Footer navigation">
+          <ul class="site-footer__nav-list">
+            <li class="site-footer__nav-item"><a href="/" class="site-footer__nav-link">Home</a></li>
+            <li class="site-footer__nav-dot" aria-hidden="true">•</li>
+            <li class="site-footer__nav-item"><a href="/pages/about/index.html" class="site-footer__nav-link">About</a></li>
+            <li class="site-footer__nav-dot" aria-hidden="true">•</li>
+            <li class="site-footer__nav-item"><a href="/pages/career/index.html" class="site-footer__nav-link" aria-current="page">Career</a></li>
+            <li class="site-footer__nav-dot" aria-hidden="true">•</li>
+            <li class="site-footer__nav-item"><a href="/pages/gallery/index.html" class="site-footer__nav-link">Gallery</a></li>
+            <li class="site-footer__nav-dot" aria-hidden="true">•</li>
+            <li class="site-footer__nav-item"><a href="/pages/fanclub/index.html" class="site-footer__nav-link">FAN CLUB</a></li>
+          </ul>
+        </nav>
+
+        <ul class="social-list social-list--footer" aria-label="Social media links">
+          <li class="social-list__item">
+            <a href="https://www.instagram.com/vancityreynolds/" class="social-list__link" aria-label="Instagram">
+              <svg class="social-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+          </li>
+          <li class="social-list__item">
+            <a href="https://twitter.com/VancityReynolds" class="social-list__link" aria-label="Twitter">
+              <svg class="social-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.5 4.6a4.1 4.1 0 0 0 1.3 5.5c-.6 0-1.3-.2-1.8-.5v.1c0 2 1.4 3.6 3.3 4a4.1 4.1 0 0 1-1.9.1 4.1 4.1 0 0 0 3.9 2.9A8.3 8.3 0 0 1 2 18.4a11.6 11.6 0 0 0 6.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+          <li class="social-list__item">
+            <a href="https://www.facebook.com/VancityReynolds" class="social-list__link" aria-label="Facebook">
+              <svg class="social-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v3.5H8V21h3.5v-7.5h2.7l.5-3.5h-3.2V7.8c0-1 .3-1.7 1.7-1.7H15V3z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+          <!-- Icône YouTube retirée : Ryan Reynolds ne possède pas de
+               chaîne YouTube personnelle officielle majeure — la conserver
+               laisserait faussement croire à l'existence d'une telle chaîne. -->
+        </ul>
+
+      </div>
+
+      <span class="site-footer__divider" aria-hidden="true"></span>
+
+      <p class="site-footer__copyright">
+        © <span id="footer-year">2026</span> Ryan Reynolds Fan Community.<br>
+        Fan-made website dedicated to Ryan Reynolds. This website is not affiliated with or endorsed by Ryan Reynolds.
+      </p>
+
+    </div>
+  </footer>
+
+  <script src="/scripts/career/career.js" defer></script>
+</body>
+</html>
+
+
+
+

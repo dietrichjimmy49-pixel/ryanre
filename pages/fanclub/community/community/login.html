@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <!-- Empêche le navigateur de proposer/forcer une traduction automatique
+       de la page. translate="no" sur <html> est le standard suivi par la
+       plupart des navigateurs ; le meta "google" ci-dessous cible en plus
+       spécifiquement Google Translate (Chrome), qui ne respecte pas
+       toujours l'attribut seul. -->
+  <meta name="google" content="notranslate">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign in to your Ryan Reynolds Fan Club account to access Inner Circle member benefits.">
+  <!-- Account/auth screens are conventionally excluded from search results
+       since they carry no unique public content; adjust per SEO policy. -->
+  <meta name="robots" content="noindex, follow">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0D0D0D">
+  <title>Member Access - Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+
+  <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 7l9 6 9-6"/>
+      </symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="11" width="16" height="9" rx="2"/>
+        <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      </symbol>
+      <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </symbol>
+      <symbol id="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 3l18 18"/>
+        <path d="M10.6 5.2A11.5 11.5 0 0 1 12 5c7 0 11 7 11 7a13.6 13.6 0 0 1-3.4 4.2M6.6 6.6C3.4 8.6 1 12 1 12s4 7 11 7a10.6 10.6 0 0 0 5-1.2"/>
+        <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+      </symbol>
+      <symbol id="icon-crown" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 8l4 3 5-6 5 6 4-3-2 10H5L3 8z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Même lien de sortie que la page de candidature (composant partagé
+       .back-to-site, défini dans tokens.css) : identité de site cohérente
+       sur les deux écrans hors navigation principale. -->
+  <a href="/" class="back-to-site">
+    <span class="back-to-site__arrow" aria-hidden="true">←</span> Back to site
+  </a>
+
+  <!-- Bouton flottant "retour à l'accueil" — masqué en haut de page,
+       révélé au scroll par scroll-home-button.js (voir login-style.css
+       pour le style). Compense .back-to-site qui défile maintenant
+       avec la page au lieu de rester fixe. -->
+  <a href="/" class="scroll-home-btn" id="scroll-home-btn" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 11.5 12 4l9 7.5" />
+      <path d="M5.5 9.5V19a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1V9.5" />
+    </svg>
+  </a>
+
+  <main>
+    <section class="login" aria-labelledby="login-heading">
+      <div class="login-card">
+
+        <header class="login-header">
+          <p class="login-eyebrow">Member Access</p>
+          <h1 class="login-title" id="login-heading">Welcome back.</h1>
+          <p class="login-subtitle">Sign in to access your Inner Circle.</p>
+        </header>
+
+        <form class="login-form" id="login-form">
+
+          <div class="login-field">
+            <label class="login-field-label" for="email">Email address</label>
+            <div class="login-field-control">
+              <span class="login-field-icon" aria-hidden="true">
+                <svg class="icon"><use href="#icon-mail"></use></svg>
+              </span>
+              <input
+                class="login-field-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                autocomplete="email"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="login-field">
+            <label class="login-field-label" for="password">Password</label>
+            <div class="login-field-control">
+              <span class="login-field-icon" aria-hidden="true">
+                <svg class="icon"><use href="#icon-lock"></use></svg>
+              </span>
+              <input
+                class="login-field-input"
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                required
+              >
+              <button
+                class="login-field-toggle"
+                type="button"
+                aria-label="Show password"
+                aria-pressed="false"
+              >
+                <span class="login-field-toggle-icon" aria-hidden="true">
+                  <svg class="icon"><use href="#icon-eye"></use></svg>
+                </span>
+              </button>
+            </div>
+
+            <a class="login-forgot-link" href="#">Forgot your password?</a>
+          </div>
+
+          <button class="btn btn-primary login-submit" type="submit" id="login-submit">
+            Sign in <span class="btn-arrow-icon">→</span>
+          </button>
+
+          <p class="login-error" id="login-error" role="alert" hidden></p>
+
+        </form>
+
+        <div class="login-divider" role="separator" aria-label="or">
+          <span class="login-divider-line" aria-hidden="true"></span>
+          <span class="login-divider-text">or</span>
+          <span class="login-divider-line" aria-hidden="true"></span>
+        </div>
+
+        <aside class="login-signup-card" aria-label="Membership application">
+          <p class="login-signup-icon" aria-hidden="true">
+            <svg class="icon"><use href="#icon-crown"></use></svg>
+          </p>
+          <p class="login-signup-text">Not a member yet?</p>
+          <a class="login-signup-link" href="apply.html">
+            Apply for membership <span class="login-signup-icon-arrow" aria-hidden="true">→</span>
+          </a>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../assets/js/supabase-client.js"></script>
+  <script src="assets/js/login.js"></script>
+  <script src="assets/js/scroll-home-button.js"></script>
+
+</body>
+</html>
