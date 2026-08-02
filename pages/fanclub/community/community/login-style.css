@@ -650,7 +650,6 @@ button {
 
 .login-field-control.is-invalid {
   border-color: var(--color-danger-border);
-  box-shadow: 0 0 0 3px var(--color-danger-soft);
 }
 
 @keyframes login-shake {
