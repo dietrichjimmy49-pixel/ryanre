@@ -1,0 +1,787 @@
+/* ===========================================================================
+   RYAN REYNOLDS — FEUILLE DE STYLE FUSIONNÉE (login-main.css + tokens.css + login.css)
+   ---------------------------------------------------------------------------
+   Fichier unique généré à partir de :
+     1. tokens.css  (reset, tokens, .btn, .back-to-site, focus-visible, reduced-motion)
+     2. login.css   (styles propres à l'écran de connexion membre)
+   Ordre conservé identique à celui chargé auparavant via les @import de
+   login-main.css, donc aucun changement visuel : tokens.css en premier
+   pour que les variables, le reset et .back-to-site soient définis avant
+   leur utilisation.
+   =========================================================================== */
+
+/* ===========================================================================
+   RYAN REYNOLDS — DESIGN TOKENS & FOUNDATION
+   ---------------------------------------------------------------------------
+   Chargé en premier par main.css. Contient tout ce qui était auparavant
+   dupliqué à l'identique dans 6 à 8 fichiers de section :
+     - reset / valeurs par défaut du navigateur
+     - palette de couleurs, typographie, ombres, rayons, z-index
+     - composant .btn (source unique)
+     - focus visible clavier
+     - prefers-reduced-motion
+     - utilitaires partagés (.section-padded, .visually-hidden)
+   Chaque fichier de section ne contient plus que ce qui lui est propre.
+
+   MAJ — alternance de fond entre sections :
+   --color-surface passe de #111111 à #151310. L'écart avec --color-ink
+   (#0D0D0D) était auparavant d'un seul cran hexadécimal, donc invisible
+   à l'œil. Le nouveau ton reste très sombre mais vire légèrement vers le
+   chaud (undertone doré, cohérent avec --color-accent) au lieu d'un simple
+   palier de luminosité neutre — ça lit comme une décision de lumière,
+   pas comme une bascule mécanique. Chaque section qui change de ton
+   (featured-works, gallery, fanclub, community, footer) ajoute en plus un
+   fondu de ~120px en haut plutôt qu'un trait net entre deux blocs de
+   couleur — voir le commentaire "Alternance de fond" dans chacun de ces
+   fichiers.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------
+   Design tokens
+   --------------------------------------------------------------- */
+:root {
+  /* Couleurs — surfaces */
+  --color-ink: #0D0D0D;         /* fond principal (body, hero, about, editorial) */
+  --color-surface: #151310;     /* fond section alterné — charbon légèrement réchauffé */
+  --color-surface-raised: #171717; /* cartes / panneaux */
+
+  /* Couleurs — texte */
+  --color-paper: #F5F5F0;       /* texte principal sur fond sombre */
+  --color-paper-72: rgba(245, 245, 240, 0.72); /* texte secondaire */
+  --color-paper-45: rgba(245, 245, 240, 0.5);  /* corrigé : 0.45 ne passait pas 4.5:1 WCAG AA (mesuré ~4.2:1) — 0.5 donne ~4.9:1, cohérent avec --color-paper-50 utilisé ailleurs sur le site */ /* texte tertiaire / méta */
+  --color-paper-10: rgba(245, 245, 240, 0.10); /* bordures discrètes */
+
+  /* Couleur — accent de marque */
+  --color-accent: #F5C518;
+  --color-accent-hover: #FFC83D;
+  --color-accent-ink: #1A1500;  /* texte sur fond accent */
+  --color-accent-soft: rgba(245, 197, 24, 0.10);
+  --color-accent-border: rgba(245, 197, 24, 0.3);
+
+  /* Couleur sémantique — échec de connexion (identifiants invalides,
+     compte suspendu). Absente jusqu'ici : la connexion ne pouvait pas
+     réellement échouer avant que FakeDB existe. */
+  --color-danger: #E5484D;
+  --color-danger-soft: rgba(229, 72, 77, 0.12);
+  --color-danger-border: rgba(229, 72, 77, 0.35);
+
+  /* Typographie */
+  --font-display: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
+
+  /* Rayons */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 10px;
+
+  /* Ombres */
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.3);
+  --shadow-cta: none; /* ombre retirée sur demande — boutons CTA uniquement */
+
+  /* Transitions */
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s var(--ease-standard);
+
+  /* Rythme vertical des sections pleine largeur */
+  --section-padding-y: 120px;
+  --section-padding-y-tablet: 88px;
+  --section-padding-y-mobile: 64px;
+
+  /* Hauteur du fondu de transition entre deux sections de tons différents */
+  --tone-fade-height: 120px;
+
+  /* Échelle de z-index — évite les valeurs magiques éparpillées */
+  --z-header: 100;
+  --z-nav-mobile: 200;
+  --z-nav-toggle: 210;
+}
+
+/* ---------------------------------------------------------------
+   Reset & valeurs par défaut
+   --------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-ink);
+  font-family: var(--font-body);
+  color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  background: none;
+  border: none;
+}
+
+/* ---------------------------------------------------------------
+   Utilitaires partagés
+   --------------------------------------------------------------- */
+.section-padded {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+@media (max-width: 1024px) {
+  .section-padded {
+    padding-top: var(--section-padding-y-tablet);
+    padding-bottom: var(--section-padding-y-tablet);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-padded {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------
+   Composant bouton — source unique
+
+   Identité de survol du site : le cadre ne bouge jamais (pas de
+   lift, pas d'ombre qui grossit) — seul le contenu réagit. Pour les
+   boutons : changement de couleur + la flèche qui glisse
+   (.btn-arrow-icon ci-dessous). Le translateY(-2px) précédemment
+   présent sur .btn-primary/.btn-secondary a été retiré.
+   --------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-fast),
+              color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: var(--shadow-cta);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-paper);
+  border-color: var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.btn-small {
+  padding: 14px 28px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.btn-arrow-icon {
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .btn-arrow-icon {
+  transform: translateX(4px);
+}
+
+.btn-header {
+  padding: 13px 26px;
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn-header:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* ---------------------------------------------------------------
+   Composant lien de retour — source unique
+
+   Utilisé sur les écrans hors navigation principale (candidature
+   Fan Club, connexion membre) qui remplacent le header du site par
+   un simple point de sortie. Discret par défaut (paper-72), passe
+   en accent doré au survol — assez visible pour être repéré tout
+   de suite sans concurrencer la carte qu'il accompagne.
+   --------------------------------------------------------------- */
+.back-to-site {
+  position: absolute;
+  top: 40px;
+  left: 48px;
+  z-index: var(--z-header);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-paper-72);
+  transition: color var(--transition-fast);
+}
+
+.back-to-site:hover,
+.back-to-site:focus-visible {
+  color: var(--color-accent);
+}
+
+.back-to-site__arrow {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.back-to-site:hover .back-to-site__arrow {
+  transform: translateX(-4px);
+}
+
+.back-to-site:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 1024px) {
+  .back-to-site { top: 28px; left: 32px; }
+}
+
+@media (max-width: 640px) {
+  .back-to-site { top: 20px; left: 20px; font-size: 12px; letter-spacing: 1px; }
+}
+
+/* ---------------------------------------------------------------
+   Bouton flottant "retour à l'accueil" — n'apparaît qu'une fois le
+   visiteur en train de scroller, pour compenser le fait que
+   .back-to-site défile désormais avec la page (voir scroll-home-
+   button.js pour la logique d'affichage).
+   --------------------------------------------------------------- */
+.scroll-home-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 48px;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  box-shadow: var(--shadow-card);
+  color: var(--color-paper-72);
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.scroll-home-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.scroll-home-btn:hover,
+.scroll-home-btn:focus-visible {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+}
+
+.scroll-home-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.scroll-home-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1024px) {
+  .scroll-home-btn { bottom: 28px; right: 32px; }
+}
+
+@media (max-width: 640px) {
+  .scroll-home-btn { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+  .scroll-home-btn svg { width: 18px; height: 18px; }
+}
+
+/* ---------------------------------------------------------------
+   Accessibilité & mouvement — globaux, une seule fois pour tout le site
+   --------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Sélection de texte — cohérente avec le reste du site (accent de marque) */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-line { animation: none; opacity: 0.5; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ===========================================================================
+   RYAN REYNOLDS — MEMBER SIGN IN
+   ---------------------------------------------------------------------------
+   Reset, tokens, .btn, .back-to-site, focus-visible et reduced-motion
+   viennent de tokens.css (chargé avant ce fichier par login-main.css).
+   Aucune couleur, police ou rayon n'est redéfini ici.
+
+   Même famille visuelle que la page de candidature Fan Club
+   (/styles/fanclub/application.css) : carte flottante centrée sur le
+   fond --color-ink, même lueur ambiante, mêmes tailles de titre/eyebrow/
+   sous-titre, même bouton primaire. Volontairement sans header/footer
+   sitewide ni image de marque : un écran de connexion n'a qu'une seule
+   tâche, la carte doit y suffire seule.
+
+   Rayons : capés à --radius-md (4px), comme sur le reste du site.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------
+   Section — identique en structure à .apply (fanclub)
+   --------------------------------------------------------------- */
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 96px 48px;
+  background-color: var(--color-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.login::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(245, 197, 24, 0.07), transparent 62%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 64px 56px;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* ---------------------------------------------------------------
+   En-tête de carte — mêmes valeurs que .apply-header
+   --------------------------------------------------------------- */
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.login-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.login-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(25px, 1.2rem + 1.44vw, 40px);
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+  color: var(--color-paper);
+  margin-top: 14px;
+}
+
+.login-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--color-paper-72);
+  margin-top: 16px;
+}
+
+/* ---------------------------------------------------------------
+   Formulaire
+   --------------------------------------------------------------- */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-field-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--color-paper-72);
+  text-transform: uppercase;
+}
+
+.login-field-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.22);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.login-field-control:focus-within {
+  border-color: var(--color-accent);
+}
+
+/* Autofill du navigateur — même parade que sur apply.html */
+.login-field-input:-webkit-autofill,
+.login-field-input:-webkit-autofill:hover,
+.login-field-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #121212 inset;
+  -webkit-text-fill-color: var(--color-paper);
+  caret-color: var(--color-paper);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.login-field-icon {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  color: var(--color-paper-45);
+  transition: color var(--transition-fast);
+}
+
+.login-field-control:focus-within .login-field-icon {
+  color: var(--color-accent);
+}
+
+.login-field-input {
+  flex: 1 1 auto;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-paper);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.login-field-input::placeholder {
+  color: var(--color-paper-45);
+}
+
+.login-field-toggle {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  margin: 0 -6px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-paper-45);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.login-field-toggle:hover {
+  color: var(--color-paper);
+}
+
+.login-field-toggle-icon {
+  width: 17px;
+  height: 17px;
+  display: inline-flex;
+  transition: transform var(--transition-fast);
+}
+
+.login-field-toggle:active .login-field-toggle-icon {
+  transform: scale(0.88);
+}
+
+.icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.login-forgot-link {
+  position: relative;
+  align-self: flex-end;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--color-accent);
+  transition: opacity var(--transition-fast);
+}
+
+.login-forgot-link:hover,
+.login-forgot-link:focus-visible {
+  opacity: 0.75;
+}
+
+/* Bouton principal — .btn-primary de tokens.css, plein-largeur ici,
+   comme .apply-submit sur la page de candidature. */
+.login-submit {
+  width: 100%;
+  justify-content: center;
+}
+
+.login-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+/* Message d'erreur — masqué par défaut (attribut [hidden]), révélé par
+   login.js suite à un échec réel de connexion (identifiants invalides
+   ou compte suspendu — voir .login-error--revoked pour ce second cas). */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border);
+  color: var(--color-danger);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.login-error[hidden] {
+  display: none;
+}
+
+.login-field-control.is-invalid {
+  border-color: var(--color-danger-border);
+}
+
+@keyframes login-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-4px); }
+  40%      { transform: translateX(3px); }
+  60%      { transform: translateX(-2px); }
+  80%      { transform: translateX(1px); }
+}
+
+.login-card.is-shaking {
+  animation: login-shake 420ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Lien démo — discret, pour retrouver un mot de passe généré tant
+   qu'aucun vrai e-mail n'est envoyé. À retirer avec le vrai backend. */
+.login-demo-link {
+  text-align: center;
+}
+
+.login-demo-link a {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-paper-45);
+  transition: color var(--transition-fast);
+}
+
+.login-demo-link a:hover {
+  color: var(--color-accent);
+}
+
+/* ---------------------------------------------------------------
+   Séparateur "or"
+   --------------------------------------------------------------- */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.login-divider-line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--color-paper-10);
+}
+
+.login-divider-text {
+  flex: 0 0 auto;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-paper-45);
+}
+
+/* ---------------------------------------------------------------
+   Carte d'inscription imbriquée — fond --color-ink pour se détacher
+   du fond --color-surface-raised de la carte parente (sinon les deux
+   surfaces se confondent, même teinte).
+   --------------------------------------------------------------- */
+.login-signup-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 28px 24px;
+  background: var(--color-ink);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-base);
+}
+
+.login-signup-card:hover,
+.login-signup-card:focus-within {
+  border-color: var(--color-accent-border);
+}
+
+.login-signup-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--color-accent);
+}
+
+.login-signup-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-paper-72);
+}
+
+.login-signup-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: opacity var(--transition-fast);
+}
+
+.login-signup-link:hover,
+.login-signup-link:focus-visible {
+  opacity: 0.75;
+}
+
+.login-signup-icon-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.login-signup-link:hover .login-signup-icon-arrow {
+  transform: translateX(4px);
+}
+
+/* ---------------------------------------------------------------
+   Responsive — mêmes paliers que application.css (1024 / 640 / 380)
+   --------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .login { padding: 80px 32px 72px; }
+
+  .login-card { max-width: 440px; padding: 52px 44px; gap: 32px; }
+}
+
+@media (max-width: 640px) {
+  .login { padding: 72px 20px 56px; }
+
+  .login-card { padding: 40px 26px; gap: 28px; border-radius: var(--radius-sm); }
+  .login-eyebrow { font-size: 11px; letter-spacing: 4px; }
+  .login-title { margin-top: 12px; }
+  .login-subtitle { font-size: 14.5px; margin-top: 14px; }
+  .login-form { gap: 24px; }
+  .login-signup-card { padding: 24px 18px; }
+}
+
+@media (max-width: 380px) {
+  .login-card { padding: 32px 20px; }
+}

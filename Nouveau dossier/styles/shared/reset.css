@@ -1,0 +1,130 @@
+/* ===========================================================================
+   RYAN REYNOLDS — DESIGN SYSTEM
+   RESET.CSS — reset unique, chargé après variables.css sur toutes les pages
+   ---------------------------------------------------------------------------
+   Consolidé à partir des 5 resets quasi identiques trouvés dans les fichiers
+   tokens.css / base.css de chaque page. Aucune divergence de VALEUR trouvée
+   ici — uniquement des divergences de forme (sélecteurs, ordre), résolues
+   en retenant la version la plus complète/défensive de chaque règle.
+
+   Ne contient que : box-sizing, normalisation des éléments HTML natifs.
+   Rien de spécifique à une page, rien de spécifique à un composant (→
+   base.css), aucune variable définie ici (→ variables.css).
+   ========================================================================= */
+
+/* -------------------------------------------------------------
+   Box-sizing universel
+   Home/Gallery utilisaient `*{...}` seul ; About/Career/Fan Club
+   utilisaient `*, *::before, *::after{...}`. Les deux sont
+   rigoureusement équivalents dans tous les navigateurs evergreen
+   (le sélecteur universel s'applique déjà au contenu généré), mais
+   la forme explicite est retenue par prudence / clarté de code —
+   aucun changement de rendu.
+   ------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------
+   Racine du document
+   font-size: 100% (trouvé sur Fan Club) est retenu plutôt que de ne
+   rien déclarer (Home/Gallery/About) ou de figer 16px (Career) :
+   100% respecte les préférences d'accessibilité du navigateur tout
+   en valant exactement 16px par défaut — donc aucun changement de
+   rendu, mais un comportement plus correct pour les visiteurs ayant
+   changé la taille de police système/navigateur.
+   ------------------------------------------------------------- */
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+html,
+body {
+  width: 100%;
+}
+
+/* -------------------------------------------------------------
+   Anti rubber-band iOS Safari + anti-fuite du scroll du menu plein
+   écran derrière la page — trouvé sur About, généralisable sans
+   risque à tout le site (comportement uniquement, aucun rendu visible
+   en usage normal).
+   ------------------------------------------------------------- */
+html {
+  overscroll-behavior-y: none;
+}
+
+/* -------------------------------------------------------------
+   Corps de page
+   Les propriétés VISUELLES (couleur de texte, poids de police,
+   line-height, font-size fluide) sont volontairement laissées à
+   base.css / aux pages : elles divergent réellement d'une page à
+   l'autre (voir audit §4) et n'ont pas leur place dans un reset.
+   Ici : uniquement le comportement de flux/scroll, identique
+   partout.
+   ------------------------------------------------------------- */
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* Neutralise le highlight bleu système au tap (Android/iOS Chrome) :
+     chaque composant tactile du site définit son propre retour visuel
+     (scale, couleur) — trouvé sur About, généralisable sans risque. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* -------------------------------------------------------------
+   Éléments HTML natifs — normalisation
+   Identique sur toutes les pages qui les définissent.
+   ------------------------------------------------------------- */
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* input ajouté (trouvé sur Fan Club) : généralisable, n'affecte que
+   les formulaires — aucune page n'a de style de formulaire concurrent
+   trouvé dans les fichiers analysés jusqu'ici. */
+input {
+  font: inherit;
+  background: none;
+  border: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-paper);
+}
+
+/* -------------------------------------------------------------
+   Sélection de texte
+   Trouvé sur About uniquement ; généralisable sans risque (aucune
+   autre page ne définissait de style ::selection concurrent).
+   ------------------------------------------------------------- */
+::selection {
+  background: var(--color-accent);
+  color: #000;
+}

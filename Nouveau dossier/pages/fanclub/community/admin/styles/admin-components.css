@@ -1,0 +1,835 @@
+/* ===========================================================================
+   RYAN REYNOLDS — ADMIN COMPONENTS
+   ---------------------------------------------------------------------------
+   Composants réutilisés sur Dashboard et Members. Repris de la partie
+   "stats / panel / application-item" de dashboard-style.css (déjà la
+   version la plus aboutie), complété par les composants qui n'existaient
+   que dans application-review.html/members.html (applicant-card, info-list,
+   quote-block, breadcrumb, table, access-control) — entièrement réécrits dans le même langage visuel plutôt que fusionnés
+   tels quels.
+
+   Pas d'image de drapeau : le pays s'affiche en texte, comme sur le reste
+   du site — plus robuste pour du contenu rendu dynamiquement (JSON) que
+   des dégradés CSS indexés par position dans la liste.
+   ========================================================================= */
+
+/* --------------------------------------------------------------------------
+   1. STATS
+   -------------------------------------------------------------------------- */
+.stats {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-card {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition-base);
+}
+
+.stat-card--highlighted { border-color: var(--color-accent-border); }
+.stat-card--success { border-color: var(--color-success-border); }
+
+.stat-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.stat-card__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-paper-45);
+}
+
+.stat-card--highlighted .stat-card__label { color: var(--color-accent); }
+.stat-card--success .stat-card__label { color: var(--color-success); }
+
+.stat-card__icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-paper-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-paper-45);
+}
+
+.stat-card__icon svg { width: 15px; height: 15px; }
+
+.stat-card--highlighted .stat-card__icon { border-color: var(--color-accent-border); color: var(--color-accent); }
+.stat-card--success .stat-card__icon { border-color: var(--color-success-border); color: var(--color-success); }
+
+.stat-card__value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 2.2vw, 38px);
+  line-height: 1;
+  color: var(--color-paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-card--highlighted .stat-card__value { color: var(--color-accent); }
+.stat-card--success .stat-card__value { color: var(--color-success); }
+
+.stat-card__caption {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--color-paper-45);
+}
+
+/* --------------------------------------------------------------------------
+   2. PANEL — conteneur générique (liste de candidatures, tableau, etc.)
+   -------------------------------------------------------------------------- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 26px;
+  border-bottom: 1px solid var(--color-paper-10);
+}
+
+.panel__heading-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-paper-72);
+}
+
+.panel--accent .panel__title {
+  color: var(--color-accent);
+  letter-spacing: 3px;
+  font-size: 12.5px;
+}
+
+.panel__badge {
+  padding: 6px 12px;
+  border-radius: 50px;
+  border: 1px solid var(--color-accent-border);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   2bis. MODAL — fiche détail affichée en pop-up par-dessus la liste/le
+   tableau (candidature depuis Dashboard, membre depuis Members). Le fond
+   reste visible et assombri, un clic en dehors de la carte, la croix, ou
+   la touche Échap referment la pop-up.
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 72px 24px;
+  overflow-y: auto;
+  background-color: rgba(13, 13, 13, 0.72);
+  backdrop-filter: blur(3px);
+  animation: modal-overlay-fade var(--transition-fast);
+}
+
+.modal-overlay[hidden] { display: none; }
+
+.modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  animation: modal-panel-rise var(--transition-base);
+}
+
+.modal-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  color: var(--color-paper-72);
+  box-shadow: var(--shadow-card);
+  transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+  transform: scale(1.06);
+}
+
+.modal-close svg { width: 15px; height: 15px; }
+
+body.modal-open { overflow: hidden; }
+
+@keyframes modal-overlay-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-panel-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 560px) {
+  .modal-overlay { padding: 48px 16px; align-items: flex-start; }
+  .modal-close {
+    top: -14px;
+    right: 4px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 380px) {
+  .modal-overlay { padding: 40px 10px; }
+}
+
+/* --------------------------------------------------------------------------
+   3. AVATAR — initiales, jamais de photo
+   -------------------------------------------------------------------------- */
+.avatar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-paper-72);
+}
+
+.avatar--sm { width: 34px; height: 34px; font-size: 12px; }
+.avatar--md { width: 42px; height: 42px; font-size: 13px; }
+.avatar--lg {
+  width: 72px;
+  height: 72px;
+  font-size: 22px;
+  border: 1.5px solid var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   4. BADGE DE STATUT — pending / approved / rejected / revoked
+   -------------------------------------------------------------------------- */
+.badge--status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.badge--status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge--pending {
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+  border: 1px solid var(--color-accent-border);
+}
+
+.badge--approved,
+.badge--active {
+  color: var(--color-success);
+  background-color: var(--color-success-soft);
+  border: 1px solid var(--color-success-border);
+}
+
+.badge--rejected,
+.badge--revoked {
+  color: var(--color-danger);
+  background-color: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border);
+}
+
+/* --------------------------------------------------------------------------
+   5. BOUTONS D'ACTION — approve / reject / danger / secondaire
+   -------------------------------------------------------------------------- */
+.btn--approve,
+.btn--reject,
+.btn--danger,
+.btn--secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+              opacity var(--transition-fast);
+}
+
+.btn--approve {
+  color: var(--color-success);
+  border-color: var(--color-success-border);
+  background-color: var(--color-success-soft);
+}
+.btn--approve:hover:not(:disabled) { background-color: rgba(147, 183, 108, 0.18); }
+
+.btn--reject,
+.btn--danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger-border);
+  background-color: var(--color-danger-soft);
+}
+.btn--reject:hover:not(:disabled),
+.btn--danger:hover:not(:disabled) { background-color: rgba(229, 72, 77, 0.18); }
+
+.btn--secondary {
+  color: var(--color-paper-72);
+  border-color: var(--color-paper-10);
+  background-color: transparent;
+}
+.btn--secondary:hover:not(:disabled) { color: var(--color-paper); border-color: var(--color-paper-45); }
+
+.btn--approve:disabled,
+.btn--reject:disabled,
+.btn--danger:disabled,
+.btn--secondary:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.btn--full { width: 100%; padding: 12px 16px; font-size: 12.5px; }
+
+.btn--link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-paper-72);
+  transition: color var(--transition-fast);
+}
+.btn--link:hover { color: var(--color-accent); }
+
+/* --------------------------------------------------------------------------
+   6. LIGNE ACTIONNABLE — filet doré au survol, motif partagé par toutes
+   les listes cliquables (candidatures, membres)
+   -------------------------------------------------------------------------- */
+.row-hover {
+  position: relative;
+  cursor: pointer;
+}
+
+.row-hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--color-accent);
+  transform: scaleY(0);
+  transition: transform var(--transition-fast);
+}
+
+.row-hover:hover::before,
+.row-hover:focus-within::before { transform: scaleY(1); }
+
+/* --------------------------------------------------------------------------
+   7. BREADCRUMB + LIEN RETOUR — vue détail (candidature ou membre)
+   -------------------------------------------------------------------------- */
+.page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb__list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb__link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-paper-45);
+  transition: color var(--transition-fast);
+}
+.breadcrumb__link:hover { color: var(--color-accent); }
+
+.breadcrumb__item[aria-current="page"] {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-paper-72);
+}
+
+.breadcrumb__separator { color: var(--color-paper-10); font-size: 11px; }
+
+/* --------------------------------------------------------------------------
+   8. APPLICANT CARD — fiche détail d'une candidature (variante de .panel)
+   -------------------------------------------------------------------------- */
+.applicant-card {
+  padding: 28px;
+  gap: 24px;
+}
+
+.applicant-card .panel__header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-paper-10);
+}
+
+.applicant-card__profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.applicant-card__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.applicant-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--color-paper);
+}
+
+.applicant-card__email a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-paper-45);
+  transition: color var(--transition-fast);
+}
+.applicant-card__email a:hover { color: var(--color-accent); }
+
+.applicant-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-paper-45);
+}
+
+.applicant-card__separator { color: var(--color-paper-10); }
+
+.applicant-card__actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+/* Liste définition clé/valeur */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-paper-10);
+}
+
+.info-list__row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.info-list__term {
+  flex: 0 0 180px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--color-paper-45);
+}
+
+.info-list__value {
+  flex: 1 1 auto;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--color-paper);
+}
+
+.applicant-card__motivation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.applicant-card__subtitle {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-paper-45);
+}
+
+.quote-block {
+  padding: 20px;
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-sm);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.quote-block p {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--color-paper-72);
+}
+
+.quote-block cite { font-style: italic; }
+
+/* --------------------------------------------------------------------------
+   9. TABLEAU DES MEMBRES
+   -------------------------------------------------------------------------- */
+.table-wrap { overflow-x: auto; }
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  padding: 14px 26px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-paper-45);
+  border-bottom: 1px solid var(--color-paper-10);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 14px 26px;
+  border-bottom: 1px solid var(--color-paper-10);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+.data-table tbody tr:hover td,
+.data-table tbody tr.is-selected td {
+  background-color: rgba(245, 245, 240, 0.02);
+}
+
+.data-table tbody tr.is-selected {
+  outline: 1px solid var(--color-accent-border);
+  outline-offset: -1px;
+}
+
+.member-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.member-identity__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--color-paper);
+}
+
+.member-identity__email {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-paper-45);
+}
+
+.data-table__country {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-paper-72);
+}
+
+/* Sous 900px, le tableau devient une liste de fiches empilées plutôt
+   qu'un tableau écrasé horizontalement : chaque <tr> devient un bloc,
+   chaque <td> affiche son data-label en préfixe (sauf la cellule
+   identité, déjà auto-descriptive avec l'avatar + le nom). Seuil relevé
+   de 640 à 900px : une tablette en portrait n'a pas plus de confort
+   qu'un téléphone face à un tableau à défilement horizontal. */
+@media (max-width: 900px) {
+  .data-table thead { display: none; }
+
+  .data-table,
+  .data-table tbody,
+  .data-table tr,
+  .data-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .data-table tr {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-paper-10);
+  }
+
+  .data-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .data-table td {
+    border-bottom: none;
+    padding: 4px 0;
+  }
+
+  .member-row__index { display: none; }
+
+  .member-row__member {
+    padding-bottom: 10px !important;
+  }
+
+  .data-table td[data-label]:not(.member-row__member) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .data-table td[data-label]:not(.member-row__member)::before {
+    content: attr(data-label);
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-paper-45);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. BARRE D'OUTILS DE FILTRAGE — Members
+   -------------------------------------------------------------------------- */
+.filter-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-form__search-input,
+.filter-form__select {
+  height: 42px;
+  padding: 0 16px;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 13px;
+  transition: border-color var(--transition-fast);
+}
+
+.filter-form__search-input { flex: 1 1 240px; }
+.filter-form__search-input::placeholder { color: var(--color-paper-45); }
+
+.filter-form__select {
+  appearance: none;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c8880' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+/* Sans ceci, la liste déroulée native peut ignorer le fond sombre du
+   select fermé et retomber sur un fond clair par défaut du navigateur/OS
+   tout en gardant le texte clair : illisible. */
+.filter-form__select option {
+  background-color: var(--color-surface-raised);
+  color: var(--color-paper);
+}
+
+.filter-form__search-input:focus-visible,
+.filter-form__select:focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 560px) {
+  .filter-form__search-input { flex-basis: 100%; }
+  .filter-form__select { flex: 1 1 calc(50% - 6px); }
+}
+
+@media (max-width: 380px) {
+  .filter-form__select { flex-basis: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   11. ACCESS CONTROL — bloc de révocation, dans la fiche membre
+   (réutilise .applicant-card / .info-list — plus de panneau latéral séparé)
+   -------------------------------------------------------------------------- */
+.access-control__description {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--color-paper-45);
+}
+
+.access-control__note {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: var(--color-paper-45);
+}
+
+/* --------------------------------------------------------------------------
+   12. RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .stats { flex-wrap: wrap; }
+  .stat-card { flex: 1 1 calc(50% - 8px); }
+  .info-list__row { flex-direction: column; gap: 2px; }
+  .info-list__term { flex-basis: auto; }
+}
+
+@media (max-width: 640px) {
+  /* Cibles tactiles confortables (≥44px) — la densité desktop (9px de
+     padding vertical) est trop serrée au doigt. */
+  .btn--approve,
+  .btn--reject,
+  .btn--danger,
+  .btn--secondary {
+    min-height: 44px;
+    padding: 10px 18px;
+  }
+
+  .panel-badge,
+  .badge--status { min-height: 26px; }
+}
+
+@media (max-width: 560px) {
+  .stat-card { flex: 1 1 100%; padding: 20px; }
+  .panel__header { padding: 16px 20px; flex-wrap: wrap; gap: 10px; }
+
+  /* Fiche détail (candidature ou membre) : avatar + identité + actions
+     empilés verticalement, boutons en pleine largeur plutôt que serrés
+     à côté du nom. */
+  .applicant-card { padding: 20px; }
+  .applicant-card__profile { flex-direction: column; }
+  .applicant-card__identity { width: 100%; }
+  .applicant-card__actions {
+    margin-left: 0;
+    width: 100%;
+    flex-direction: column;
+  }
+  .applicant-card__actions .btn--approve,
+  .applicant-card__actions .btn--reject,
+  .applicant-card__actions .btn--danger {
+    width: 100%;
+  }
+  .applicant-card__meta { flex-wrap: wrap; row-gap: 4px; }
+
+  .info-list { gap: 10px; }
+  .info-list__term { font-size: 11.5px; }
+}
+
+@media (max-width: 380px) {
+  .applicant-card__name { font-size: 18px; }
+  .stat-card__value { font-size: clamp(26px, 8vw, 32px); }
+}
+
+/* --------------------------------------------------------------------------
+   13. TOAST — confirmation discrète après une décision (approve/reject)
+   -------------------------------------------------------------------------- */
+.admin-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 12px);
+  max-width: min(480px, calc(100vw - 40px));
+  padding: 14px 20px;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  z-index: 400;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.admin-toast--visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

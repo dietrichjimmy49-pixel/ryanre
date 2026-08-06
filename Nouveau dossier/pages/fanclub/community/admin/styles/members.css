@@ -1,0 +1,33 @@
+/* ===========================================================================
+   RYAN REYNOLDS — ADMIN MEMBERS
+   ---------------------------------------------------------------------------
+   admin-shell.css + admin-components.css chargés avant ce fichier.
+
+   Deux vues, un seul parent, jamais visibles en même temps — même principe
+   que Dashboard (candidatures) et que l'annuaire public : cliquer sur un
+   membre ne fait pas apparaître un panneau à côté d'un tableau qui reste
+   affiché, le tableau laisse entièrement la place à la fiche détail, avec
+   un lien "Back to Members" pour revenir.
+   ========================================================================= */
+
+#members-list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.table-wrap {
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.members-table__empty {
+  padding: 48px 26px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--color-paper-45);
+}

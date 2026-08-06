@@ -1,0 +1,826 @@
+/* ===========================================================================
+   RYAN REYNOLDS — FEUILLE DE STYLE FUSIONNÉE (main.css + tokens.css + application.css)
+   ---------------------------------------------------------------------------
+   Fichier unique généré à partir de :
+     1. tokens.css      (reset, tokens, .btn, focus-visible, reduced-motion)
+     2. application.css (styles de la page d'inscription)
+   Ordre conservé identique à celui chargé auparavant via les @import de
+   main.css, donc aucun changement visuel : tokens.css en premier pour que
+   les variables et le reset soient définis avant leur utilisation.
+   =========================================================================== */
+
+/* ===========================================================================
+   RYAN REYNOLDS — DESIGN TOKENS & FOUNDATION
+   ---------------------------------------------------------------------------
+   Chargé en premier par main.css. Contient tout ce qui était auparavant
+   dupliqué à l'identique dans 6 à 8 fichiers de section :
+     - reset / valeurs par défaut du navigateur
+     - palette de couleurs, typographie, ombres, rayons, z-index
+     - composant .btn (source unique)
+     - focus visible clavier
+     - prefers-reduced-motion
+     - utilitaires partagés (.section-padded, .visually-hidden)
+   Chaque fichier de section ne contient plus que ce qui lui est propre.
+
+   MAJ — alternance de fond entre sections :
+   --color-surface passe de #111111 à #151310. L'écart avec --color-ink
+   (#0D0D0D) était auparavant d'un seul cran hexadécimal, donc invisible
+   à l'œil. Le nouveau ton reste très sombre mais vire légèrement vers le
+   chaud (undertone doré, cohérent avec --color-accent) au lieu d'un simple
+   palier de luminosité neutre — ça lit comme une décision de lumière,
+   pas comme une bascule mécanique. Chaque section qui change de ton
+   (featured-works, gallery, fanclub, community, footer) ajoute en plus un
+   fondu de ~120px en haut plutôt qu'un trait net entre deux blocs de
+   couleur — voir le commentaire "Alternance de fond" dans chacun de ces
+   fichiers.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------
+   Design tokens
+   --------------------------------------------------------------- */
+:root {
+  /* Couleurs — surfaces */
+  --color-ink: #0D0D0D;         /* fond principal (body, hero, about, editorial) */
+  --color-surface: #151310;     /* fond section alterné — charbon légèrement réchauffé */
+  --color-surface-raised: #171717; /* cartes / panneaux */
+
+  /* Couleurs — texte */
+  --color-paper: #F5F5F0;       /* texte principal sur fond sombre */
+  --color-paper-72: rgba(245, 245, 240, 0.72); /* texte secondaire */
+  --color-paper-45: rgba(245, 245, 240, 0.5);  /* corrigé : 0.45 ne passait pas 4.5:1 WCAG AA (mesuré ~4.2:1) — 0.5 donne ~4.9:1, cohérent avec --color-paper-50 utilisé ailleurs sur le site */ /* texte tertiaire / méta */
+  --color-paper-10: rgba(245, 245, 240, 0.10); /* bordures discrètes */
+
+  /* Couleur — accent de marque */
+  --color-accent: #F5C518;
+  --color-accent-hover: #FFC83D;
+  --color-accent-ink: #1A1500;  /* texte sur fond accent */
+  --color-accent-soft: rgba(245, 197, 24, 0.10);
+  --color-accent-border: rgba(245, 197, 24, 0.3);
+
+  --color-danger: #E5484D;
+  --color-danger-soft: rgba(229, 72, 77, 0.12);
+  --color-danger-border: rgba(229, 72, 77, 0.35);
+
+  /* Typographie */
+  --font-display: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
+
+  /* Rayons */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 10px;
+
+  /* Ombres */
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.3);
+  --shadow-cta: none; /* ombre retirée sur demande — boutons CTA uniquement */
+
+  /* Transitions */
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s var(--ease-standard);
+
+  /* Rythme vertical des sections pleine largeur */
+  --section-padding-y: 120px;
+  --section-padding-y-tablet: 88px;
+  --section-padding-y-mobile: 64px;
+
+  /* Hauteur du fondu de transition entre deux sections de tons différents */
+  --tone-fade-height: 120px;
+
+  /* Échelle de z-index — évite les valeurs magiques éparpillées */
+  --z-header: 100;
+  --z-nav-mobile: 200;
+  --z-nav-toggle: 210;
+}
+
+/* ---------------------------------------------------------------
+   Reset & valeurs par défaut
+   --------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-ink);
+  font-family: var(--font-body);
+  color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  background: none;
+  border: none;
+}
+
+/* ---------------------------------------------------------------
+   Utilitaires partagés
+   --------------------------------------------------------------- */
+.section-padded {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+@media (max-width: 1024px) {
+  .section-padded {
+    padding-top: var(--section-padding-y-tablet);
+    padding-bottom: var(--section-padding-y-tablet);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-padded {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------
+   Composant bouton — source unique
+
+   Identité de survol du site : le cadre ne bouge jamais (pas de
+   lift, pas d'ombre qui grossit) — seul le contenu réagit. Pour les
+   boutons : changement de couleur + la flèche qui glisse
+   (.btn-arrow-icon ci-dessous). Le translateY(-2px) précédemment
+   présent sur .btn-primary/.btn-secondary a été retiré.
+   --------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-fast),
+              color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: var(--shadow-cta);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-paper);
+  border-color: var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.btn-small {
+  padding: 14px 28px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.btn-arrow-icon {
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .btn-arrow-icon {
+  transform: translateX(4px);
+}
+
+.btn-header {
+  padding: 13px 26px;
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn-header:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* ---------------------------------------------------------------
+   Accessibilité & mouvement — globaux, une seule fois pour tout le site
+   --------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Sélection de texte — cohérente avec le reste du site (accent de marque) */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-line { animation: none; opacity: 0.5; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ===========================================================================
+   RYAN REYNOLDS — FAN CLUB / MEMBERSHIP APPLICATION
+   -------------------------------------------------------------------------
+   Reset, tokens, .btn, .visually-hidden, focus-visible et reduced-motion
+   viennent de tokens.css (chargé avant ce fichier par main.css). Aucune
+   couleur, police ou rayon n'est redéfini ici : tout vient du système
+   partagé du site, comme sur la page d'accueil.
+
+   Rayons : capés à --radius-md (4px) sur toute la page — la carte, les
+   champs et le bouton n'utilisent jamais --radius-lg, pour rester dans
+   un registre net et discret plutôt que "carte flottante" arrondie.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------
+   Lien de sortie — remplace le header sitewide sur cette page.
+   Volontairement discret (pas de fond, pas de cadre) mais assez
+   contrasté (paper-72, accent au survol) pour rester repérable en
+   un coup d'œil sans concurrencer visuellement la carte.
+   --------------------------------------------------------------- */
+.back-to-site {
+  position: absolute;
+  top: 40px;
+  left: 48px;
+  z-index: var(--z-header);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-paper-72);
+  transition: color var(--transition-fast);
+}
+
+.back-to-site:hover,
+.back-to-site:focus-visible {
+  color: var(--color-accent);
+}
+
+.back-to-site__arrow {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.back-to-site:hover .back-to-site__arrow {
+  transform: translateX(-4px);
+}
+
+.back-to-site:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------------
+   Bouton flottant "retour à l'accueil" — n'apparaît qu'une fois le
+   visiteur en train de scroller, pour compenser le fait que
+   .back-to-site défile désormais avec la page (voir scroll-home-
+   button.js pour la logique d'affichage).
+   --------------------------------------------------------------- */
+.scroll-home-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 48px;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  box-shadow: var(--shadow-card);
+  color: var(--color-paper-72);
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.scroll-home-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.scroll-home-btn:hover,
+.scroll-home-btn:focus-visible {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+}
+
+.scroll-home-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.scroll-home-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Sans header fixe au-dessus, la page n'a plus besoin de compenser
+   sa hauteur : padding vertical simplifié, la carte respire seule
+   sur le fond. */
+.apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 96px 48px;
+  background-color: var(--color-ink);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Lueur ambiante très discrète derrière la carte — seul accent de
+   mise en scène de la page, dans l'esprit de .diamond-wrap::before
+   sur la section Fan Club de la home. */
+.apply::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(245, 197, 24, 0.07), transparent 62%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.apply-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  padding: 64px 56px;
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* ---------------------------------------------------------------
+   En-tête de carte
+   --------------------------------------------------------------- */
+.apply-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.apply-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.apply-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(25px, 1.2rem + 1.44vw, 40px);
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+  color: var(--color-paper);
+  margin-top: 14px;
+}
+
+.apply-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--color-paper-72);
+  margin-top: 16px;
+  max-width: 400px;
+}
+
+/* ---------------------------------------------------------------
+   Formulaire
+   --------------------------------------------------------------- */
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.apply-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.apply-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.apply-row > .apply-field {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+
+.apply-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.apply-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--color-paper-72);
+  text-transform: uppercase;
+}
+
+.apply-input,
+.apply-select,
+.apply-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+.apply-input::placeholder,
+.apply-textarea::placeholder {
+  color: var(--color-paper-45);
+}
+
+.apply-textarea {
+  min-height: 116px;
+  resize: vertical;
+}
+
+/* Autofill du navigateur (Chrome/Safari/Edge) : ils imposent leur propre
+   fond au remplissage automatique en ignorant background-color. Seule
+   parade fiable : un immense box-shadow interne de la même couleur que
+   le fond réel du champ (rgba(0,0,0,0.22) posé sur --color-surface-raised
+   #171717 donne environ #121212 une fois composé). */
+.apply-input:-webkit-autofill,
+.apply-input:-webkit-autofill:hover,
+.apply-input:-webkit-autofill:focus,
+.apply-select:-webkit-autofill,
+.apply-textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #121212 inset;
+  -webkit-text-fill-color: var(--color-paper);
+  caret-color: var(--color-paper);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Flèche de select personnalisée, teinte alignée sur --color-paper-45 */
+.apply-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c8880' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Sans ceci, la liste déroulée native hérite du fond clair par défaut du
+   navigateur/OS tout en gardant le texte clair de .apply-select (color:
+   var(--color-paper)) : texte quasi invisible sur fond quasi identique.
+   .apply-select étant sur un fond semi-transparent (rgba(0,0,0,0.22)),
+   il faut un fond OPAQUE ici — les popups natifs de select ne supportent
+   pas la transparence de façon fiable selon les navigateurs. */
+.apply-select option {
+  background-color: var(--color-surface-raised);
+  color: var(--color-paper);
+}
+
+.apply-input:focus,
+.apply-select:focus,
+.apply-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+/* Champ mis en avant (email) — bordure accent visible sans attendre le focus */
+.apply-field--accent .apply-input {
+  border-color: var(--color-accent-border);
+}
+
+/* Validation discrète, seulement après interaction */
+.apply-input:not(:placeholder-shown):valid,
+.apply-textarea:not(:placeholder-shown):valid {
+  border-color: rgba(120, 200, 140, 0.5);
+}
+
+.apply-input:not(:placeholder-shown):invalid:not(:focus),
+.apply-textarea:not(:placeholder-shown):invalid:not(:focus) {
+  border-color: rgba(214, 108, 108, 0.5);
+}
+
+.apply-help,
+.apply-counter {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-paper-45);
+}
+
+.apply-help--error {
+  color: var(--color-danger);
+}
+
+.apply-input.is-invalid {
+  border-color: var(--color-danger-border);
+  box-shadow: 0 0 0 3px var(--color-danger-soft);
+}
+
+.apply-counter {
+  align-self: flex-end;
+}
+
+/* ---- Consentement ---- */
+.apply-field--checkbox {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.apply-checkbox {
+  appearance: none;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.22);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.apply-checkbox:checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.apply-checkbox::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--color-accent-ink);
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+  transform: rotate(45deg);
+  transition: opacity var(--transition-fast);
+}
+
+.apply-checkbox:checked::after {
+  opacity: 1;
+}
+
+.apply-checkbox:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.apply-checkbox-label {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-paper-72);
+}
+
+.apply-link {
+  color: var(--color-accent);
+  transition: opacity var(--transition-fast);
+}
+
+.apply-link:hover,
+.apply-link:focus-visible {
+  opacity: 0.75;
+}
+
+/* ---- Actions ---- */
+.apply-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.apply-submit {
+  width: 100%;
+  justify-content: center;
+}
+
+.apply-login {
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-align: center;
+  color: var(--color-paper-72);
+}
+
+.apply-privacy {
+  font-family: var(--font-body);
+  font-size: 12px;
+  text-align: center;
+  color: var(--color-paper-45);
+}
+
+/* Bloc démo — visuellement distinct (bordure pointillée) pour bien
+   signaler que ce n'est pas du contenu de production. À retirer quand
+   le vrai backend enverra un vrai e-mail. */
+.apply-demo-note {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px;
+  border: 1px dashed var(--color-accent-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  text-align: center;
+}
+
+.apply-demo-note__label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.apply-demo-note__text {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--color-paper-72);
+}
+
+.apply-demo-note__links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+.apply-demo-note__links a {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: opacity var(--transition-fast);
+}
+
+.apply-demo-note__links a:hover {
+  opacity: 0.75;
+}
+
+/* ---------------------------------------------------------------
+   Responsive — mêmes paliers que le reste du site (1024 / 768 / 640 / 380)
+   --------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .apply { padding: 80px 32px 72px; }
+  .back-to-site { top: 28px; left: 32px; }
+
+  .apply-card { max-width: 560px; padding: 52px 44px; gap: 36px; }
+
+  .scroll-home-btn { bottom: 28px; right: 32px; }
+}
+
+@media (max-width: 640px) {
+  .apply { padding: 72px 20px 56px; }
+  .back-to-site { top: 20px; left: 20px; font-size: 12px; letter-spacing: 1px; }
+
+  .apply-card { padding: 40px 26px; gap: 32px; border-radius: var(--radius-sm); }
+  .apply-eyebrow { font-size: 11px; letter-spacing: 4px; }
+  .apply-title { margin-top: 12px; }
+  .apply-subtitle { font-size: 14.5px; margin-top: 14px; }
+  .apply-form { gap: 22px; }
+  .apply-group { gap: 14px; }
+  .apply-row { flex-direction: column; gap: 14px; }
+  .apply-row > .apply-field { flex-basis: auto; }
+
+  .scroll-home-btn { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+  .scroll-home-btn svg { width: 18px; height: 18px; }
+}
+
+@media (max-width: 380px) {
+  .apply-card { padding: 32px 20px; }
+}
+
+/* Piège à robots (honeypot) — masqué visuellement et retiré du parcours
+   clavier/lecteur d'écran (voir aria-hidden + tabindex="-1" côté HTML),
+   mais toujours présent dans le DOM pour qu'un robot qui remplit tous
+   les champs sans regarder le CSS le renseigne. */
+.apply-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Bannière d'erreur — remplace les alert() natifs du navigateur, pour
+   rester cohérent avec le style utilisé sur login.html (.login-error). */
+.apply-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border);
+  color: var(--color-danger);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.apply-error[hidden] {
+  display: none;
+}

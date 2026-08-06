@@ -1,0 +1,170 @@
+/* ===========================================================================
+   RYAN REYNOLDS — DESIGN SYSTEM
+   VARIABLES.CSS — source unique de vérité pour tous les design tokens
+   ---------------------------------------------------------------------------
+   Consolidé à partir des 5 pages du site (home, about, career, gallery,
+   fanclub). Chargé en premier, avant reset.css et base.css, sur TOUTES
+   les pages.
+
+   Ce fichier ne contient QUE des custom properties (:root). Aucun style
+   appliqué à un élément ou une classe — voir reset.css et base.css.
+
+   Historique de consolidation : les 5 pages avaient développé des jeux
+   de tokens quasi identiques en valeur, mais avec des noms différents
+   (ex. le token "texte tertiaire à 50% d'opacité" s'appelait
+   --color-paper-45 sur Home/Career/Fan Club, --color-paper-50 sur
+   Gallery, --color-text-dim sur About — la valeur réelle (0.5) est
+   fidèlement rendue par le nom Gallery, retenu ici comme canonique).
+
+   Les valeurs qui divergent RÉELLEMENT d'une page à l'autre (pas
+   seulement de nom) ne sont PAS forcées ici à une valeur unique : ça
+   changerait le rendu visuel de la page concernée. Ces cas sont
+   documentés en commentaire et resteront en override local dans le
+   fichier CSS de la page concernée, chargé après ce fichier.
+   ========================================================================= */
+
+:root {
+
+  /* -------------------------------------------------------------
+     Couleurs — surfaces
+     Identiques sur les 5 pages, aucune divergence.
+     ------------------------------------------------------------- */
+  --color-ink: #0D0D0D;              /* fond principal (body, hero, sections "sombres") */
+  --color-surface: #151310;          /* fond de section alterné — charbon légèrement réchauffé */
+  --color-surface-raised: #171717;   /* cartes / panneaux */
+
+  /* -------------------------------------------------------------
+     Couleurs — texte
+     Nom canonique retenu : --color-paper-50 (valeur réelle : 0.5 alpha).
+     Alias hérités trouvés dans le code source : --color-paper-45 (Home/
+     Career/Fan Club), --color-text-dim (About). Ces noms seront
+     remplacés par --color-paper-50 lors du passage CSS de chaque page.
+     ------------------------------------------------------------- */
+  --color-paper: #F5F5F0;                          /* texte principal sur fond sombre */
+  --color-paper-72: rgba(245, 245, 240, 0.72);     /* texte secondaire */
+  --color-paper-50: rgba(245, 245, 240, 0.5);      /* texte tertiaire / méta — ≥4.5:1 (WCAG AA) sur ink/surface/surface-raised */
+  --color-paper-16: rgba(245, 245, 240, 0.16);     /* bordure renforcée (ex. --border-subtle-strong sur About) */
+  --color-paper-10: rgba(245, 245, 240, 0.10);     /* bordure discrète */
+
+  /* -------------------------------------------------------------
+     Couleur — accent de marque
+     Identique sur les 5 pages.
+     ------------------------------------------------------------- */
+  --color-accent: #F5C518;
+  --color-accent-hover: #FFC83D;
+  --color-accent-ink: #1A1500;                     /* texte sur fond accent */
+  --color-accent-soft: rgba(245, 197, 24, 0.10);
+  --color-accent-border: rgba(245, 197, 24, 0.3);  /* alias trouvé : --color-accent-dim (About), même valeur */
+
+  /* -------------------------------------------------------------
+     Typographie
+     Identique sur les 5 pages.
+     ------------------------------------------------------------- */
+  --font-display: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
+
+  /* -------------------------------------------------------------
+     Police du logo texte — caricaturale, volontairement distincte
+     de --font-display et --font-body : c'est la seule pièce de
+     texte du site à ne pas suivre le système typographique éditorial,
+     un choix de marque assumé. Utilisée par .logo-text (header) et
+     .site-footer__logo-text (footer) sur les 5 pages. Chargée via
+     Google Fonts dans le <head> de chaque page (voir index.html,
+     about.html, career.html, fanclub.html, gallery.html).
+     ------------------------------------------------------------- */
+  --font-logo: 'Titan One', cursive;
+
+  /* -------------------------------------------------------------
+     Rayons
+     Identique sur les 5 pages (radius-lg non utilisé partout mais
+     sans conflit de valeur : conservé pour cohérence du système).
+     ------------------------------------------------------------- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 10px;
+
+  /* -------------------------------------------------------------
+     Ombres
+     --shadow-card : valeur retenue = Home/Gallery (0 16px 40px .3),
+     motif majoritaire. Career utilise une ombre plus marquée
+     (0 20px 40px .35) : DIVERGENCE RÉELLE, conservée en override
+     dans career (voir audit §4) — ne pas modifier ici sous peine de
+     changer visuellement les cartes de Career.
+     --shadow-cta : valeur déjà partagée en dur par Home et About
+     (hero CTA) et en token par Career/Gallery — canonisée ici.
+     ------------------------------------------------------------- */
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.3);
+  --shadow-cta: none; /* ombre retirée sur demande — boutons CTA uniquement */
+
+  /* -------------------------------------------------------------
+     Transitions & easing
+     --ease-standard est déjà strictement identique partout : seul
+     token de motion totalement sûr à canoniser sans réserve.
+     --transition-fast et --transition-hover ont des divergences
+     réelles ponctuelles (Fan Club / Gallery) — voir audit §4 :
+     valeur canonique = motif majoritaire (0.25s ease), les pages
+     déviantes gardent leur override local.
+     ------------------------------------------------------------- */
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);         /* trouvé sur Career, utile site-wide pour les zooms image */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* trouvé sur Career, rebond d'icônes */
+
+  --transition-fast: 0.25s ease;
+  --transition-hover: 0.25s ease;
+  --transition-base: 0.4s var(--ease-standard);
+  --transition-press: 0.15s ease-out;                /* retour tactile :active, quasi instantané */
+  --transition-reveal: 0.6s var(--ease-standard);     /* apparitions / scroll reveal */
+  --stagger-step: 90ms;                               /* pas entre deux éléments d'une même séquence animée */
+
+  /* -------------------------------------------------------------
+     Rythme vertical des sections
+     Identique sur Home/Gallery ; canonisé pour tout le site.
+     ------------------------------------------------------------- */
+  --section-padding-y: 120px;
+  --section-padding-y-tablet: 88px;
+  --section-padding-y-mobile: 64px;
+  --section-padding-x: clamp(20px, 4.4vw, 64px);      /* trouvé sur About, généralisable */
+
+  /* -------------------------------------------------------------
+     Conteneur de page
+     1400px→1560px est le motif majoritaire (Home footer, Career
+     .container, 4 sections de Gallery). About (1440px, .page) et
+     Fan Club (1200px→1320px, x3 sections dupliquées) DIVERGENT
+     réellement : ces deux pages conservent leur propre largeur en
+     local pour ne pas changer leur mise en page. Voir audit §4.
+     ------------------------------------------------------------- */
+  --content-max-width: 1400px;
+  --content-max-width-wide: 1560px; /* ≥1600px viewport */
+
+  /* -------------------------------------------------------------
+     Hauteur du header fixe (précise, calée sur header.css)
+     Calqué sur About (le plus exact des 5). Les autres pages
+     utilisent aujourd'hui des approximations (clamp ou valeurs en
+     dur) légèrement différentes — voir audit §6. Le token est mis
+     à disposition de tout le site ; chaque page choisit lors de son
+     propre passage si elle adopte la valeur exacte.
+     ------------------------------------------------------------- */
+  --header-height: 92px;
+  --header-height-tablet: 76px;
+  --header-height-mobile: 64px;
+
+  /* -------------------------------------------------------------
+     Cible tactile minimale (Apple HIG / WCAG 2.5.5)
+     Trouvé sur Home, généralisable à tout composant interactif
+     redimensionné sous 1024px.
+     ------------------------------------------------------------- */
+  --tap-target-min: 44px;
+
+  /* -------------------------------------------------------------
+     Échelle de z-index — CANONIQUE = version corrigée
+     (About/Career/Gallery/Fan Club). Home a encore l'ANCIENNE valeur
+     buggée dans son propre fichier (menu mobile non cliquable) —
+     voir audit §2. Cette valeur canonique corrige Home dès l'import
+     de ce fichier ; c'est un correctif fonctionnel volontaire,
+     signalé explicitement plutôt qu'appliqué en silence.
+     ------------------------------------------------------------- */
+  --z-header: 300;
+  --z-nav-backdrop: 200;
+  --z-nav-mobile: 210;
+  --z-nav-toggle: 220;
+}
