@@ -130,6 +130,10 @@ const SupabaseDB = (function () {
       email: email,
       password: password,
       options: {
+        /* Sans ça, Supabase redirige vers la "Site URL" générale
+           (la page d'accueil) après le clic sur le lien de confirmation,
+           au lieu de la page dédiée email-confirmed.html. */
+        emailRedirectTo: window.location.origin + "/pages/fanclub/community/community/email-confirmed.html",
         data: {
           first_name: firstName,
           last_name: lastName,

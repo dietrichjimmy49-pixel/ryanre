@@ -36,14 +36,9 @@
         <p class="apply-eyebrow">FAN CLUB · APPLICATION SUBMITTED</p>
         <h1 class="apply-title">You're on the list, ${firstName}.</h1>
         <p class="apply-subtitle">
-          We've sent a confirmation e-mail to <strong>${email}</strong> —
-          click the link inside to confirm your address (check your spam
-          folder if you don't see it within a few minutes).
-        </p>
-        <p class="apply-subtitle">
-          Every application is then personally reviewed. Once approved,
-          you'll be able to sign in with the email and password you just
-          chose.
+          We've sent a confirmation e-mail to <strong>${email}</strong>.
+          Click the link inside to confirm your address (check your spam
+          folder if you don't see it).
         </p>
       </header>
 
@@ -164,7 +159,6 @@
 
         const card = document.querySelector(".apply-card");
         renderConfirmation(card, firstName, email);
-        card.scrollIntoView({ behavior: "smooth", block: "start" });
       } catch (err) {
         console.error("[apply] Failed to submit the application:", err);
         submitBtn.disabled = false;
