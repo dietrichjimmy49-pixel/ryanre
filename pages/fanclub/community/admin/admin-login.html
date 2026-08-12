@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <!-- Empêche le navigateur de proposer/forcer une traduction automatique
+       de la page. translate="no" sur <html> est le standard suivi par la
+       plupart des navigateurs ; le meta "google" ci-dessous cible en plus
+       spécifiquement Google Translate (Chrome), qui ne respecte pas
+       toujours l'attribut seul. -->
+  <meta name="google" content="notranslate">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Redirecting…</title>
+  <!-- La connexion admin est désormais unifiée avec celle des membres,
+       dans community/login.html (un seul formulaire pour les deux types
+       de comptes — voir ../assets/js/supabase-client.js). Ce fichier ne
+       reste que pour rediriger un éventuel lien ou favori vers l'ancienne
+       adresse. -->
+  <meta http-equiv="refresh" content="0; url=../community/login.html">
+  <script>window.location.replace("../community/login.html");</script>
+</head>
+<body>
+  <p>Redirecting to <a href="../community/login.html">the login page</a>…</p>
+</body>
+</html>

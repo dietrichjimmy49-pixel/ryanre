@@ -1,0 +1,79 @@
+/* ===========================================================================
+   JOIN FAB — bouton flottant "rejoindre la communauté", présent sur les
+   5 pages vitrine (Home, About, Career, Gallery, Fan Club). Il remplace
+   le seul chemin qui existait jusqu'ici pour un membre déjà inscrit
+   (passer par apply.html puis cliquer sur "Sign in") par un accès direct,
+   depuis n'importe quelle page.
+
+   Design volontairement DISTINCT du reste du site — couleur pleine dès le
+   repos, pas seulement au survol — pour rester identifiable au premier
+   coup d'œil et ne jamais se confondre avec un autre élément interactif
+   de la page (nav, CTA...) quand on le survole.
+
+   La destination réelle (login.html ou discussion.html) est décidée par
+   join-fab.js selon qu'une session Supabase est active ou non ; ce
+   fichier ne gère que l'apparence.
+   ========================================================================= */
+
+.join-fab {
+  position: fixed;
+  top: 66%;
+  right: 24px;
+  z-index: var(--z-header);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transform: translateY(-50%);
+}
+
+.join-fab__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent-border);
+  white-space: nowrap;
+}
+
+.join-fab__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.join-fab__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .join-fab:hover .join-fab__icon {
+    background: var(--color-accent-hover);
+    transform: scale(1.08);
+  }
+}
+
+.join-fab:focus-visible .join-fab__icon {
+  outline: 2px solid var(--color-paper);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .join-fab { right: 16px; top: 70%; }
+  .join-fab__icon { width: 48px; height: 48px; }
+  .join-fab__icon svg { width: 20px; height: 20px; }
+  .join-fab__label { font-size: 10px; padding: 3px 8px; }
+}

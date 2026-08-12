@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <!-- Empêche le navigateur de proposer/forcer une traduction automatique
+       de la page. translate="no" sur <html> est le standard suivi par la
+       plupart des navigateurs ; le meta "google" ci-dessous cible en plus
+       spécifiquement Google Translate (Chrome), qui ne respecte pas
+       toujours l'attribut seul. -->
+  <meta name="google" content="notranslate">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Card | Ryan Reynolds Fan Club</title>
+  <meta name="description" content="Discover the Ryan Reynolds Fan Club membership card: your all-access pass to private events, exclusive gifts and the Inner Circle community.">
+  <link rel="canonical" href="https://www.teamreynolds.club/pages/fanclub/community/community/membership-card.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Membership Card | Ryan Reynolds Fan Club">
+  <meta property="og:description" content="Discover the Ryan Reynolds Fan Club membership card: your all-access pass to private events, exclusive gifts and the Inner Circle community.">
+  <meta property="og:image" content="https://www.teamreynolds.club/assets/images/shared/logo.png">
+  <meta property="og:url" content="https://www.teamreynolds.club/pages/fanclub/community/community/membership-card.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&family=Titan+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="membership-card.css">
+</head>
+<body>
+
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Open or close the navigation menu">
+
+  <!-- Bouton "trois traits" — placé directement au niveau du body (hors
+       de .app-shell) pour rester toujours visible et cliquable au-dessus
+       de la sidebar, que le tiroir soit ouvert ou fermé (voir shell.css). -->
+  <label for="nav-toggle" class="app-toggle-button" aria-label="Ouvrir le menu de navigation">
+    <span class="app-toggle-button__bar"></span>
+    <span class="app-toggle-button__bar"></span>
+    <span class="app-toggle-button__bar"></span>
+  </label>
+
+  <div class="app-shell">
+
+    <label for="nav-toggle" class="nav-toggle-overlay" aria-hidden="true"></label>
+
+    <!-- ============================================================
+         SIDEBAR — identique sur les 4 pages (voir shell.css)
+    ============================================================= -->
+    <header class="app-sidebar thin-scroll">
+
+      <div class="app-sidebar__top">
+        <a href="/" class="app-sidebar__brand" aria-label="Ryan Reynolds Fan Club - Accueil">
+          <span class="app-sidebar__brand-logo">
+            <img src="/assets/images/shared/avatar.jpg" alt="Ryan Reynolds Fan Club emblem">
+          </span>
+          <span class="app-sidebar__brand-name">
+            Ryan Reynolds
+            <span class="app-sidebar__brand-tagline">Fan Club</span>
+          </span>
+        </a>
+        <label for="nav-toggle" class="app-sidebar__close" aria-label="Close menu">✕</label>
+      </div>
+
+      <nav class="app-nav" aria-label="Navigation principale">
+        <ul class="app-nav__list">
+          <li class="app-nav__item">
+            <a class="app-nav__link" href="/">
+              <span class="app-nav__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 10.5L12 3l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5.5 9.5V20a1 1 0 0 0 1 1H9.5a1 1 0 0 0 1-1v-4.5a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1V20a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="app-nav__label">Home</span>
+            </a>
+          </li>
+          <li class="app-nav__item">
+            <a class="app-nav__link" href="discussion.html">
+              <span class="app-nav__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 5.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4 3.3V16H4a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="app-nav__label">Discussion</span>
+            </a>
+          </li>
+          <li class="app-nav__item">
+            <a class="app-nav__link" href="members-directory.html">
+              <span class="app-nav__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="8.5" cy="10.3" r="2" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M5.3 15.3c.4-1.7 1.6-2.6 3.2-2.6s2.8.9 3.2 2.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M14 9.3h4M14 12.3h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="app-nav__label">Top Members</span>
+            </a>
+          </li>
+          <li class="app-nav__item app-nav__item--active">
+            <a class="app-nav__link" href="membership-card.html" aria-current="page">
+              <span class="app-nav__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M3 10.3h18" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              </span>
+              <span class="app-nav__label">Membership Card</span>
+            </a>
+          </li>
+          <!-- Visible uniquement en session admin (voir assets/js/admin-nav.js) -->
+          <li class="app-nav__item" id="admin-nav-item" hidden>
+            <a class="app-nav__link" href="../admin/dashboard.html">
+              <span class="app-nav__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="app-nav__label">Admin</span>
+            </a>
+          </li>
+          <!-- Déconnexion réelle (voir assets/js/logout.js) -->
+          <li class="app-nav__item">
+            <a class="app-nav__link" href="#" id="logout-link">
+              <span class="app-nav__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12H9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="app-nav__label">Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <input type="checkbox" id="sidebar-bottom-toggle" class="sidebar-bottom-toggle-input">
+        <label for="sidebar-bottom-toggle" class="sidebar-bottom__handle" aria-label="Collapse or expand social links and membership">
+          <span class="sidebar-bottom__chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="sidebar-bottom__content">
+          <div class="sidebar-bottom__inner">
+
+            <nav class="app-social" aria-label="Social media">
+              <ul class="app-social__list">
+                <li>
+                  <a class="app-social__link" href="https://www.instagram.com/vancityreynolds/" aria-label="Instagram" target="_blank" rel="noopener">
+                    <span class="app-social__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.7"/>
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+                        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="app-social__link" href="https://twitter.com/VancityReynolds" aria-label="Twitter" target="_blank" rel="noopener">
+                    <span class="app-social__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4l7.2 9.4L4.4 20H6.6l6-6.2L17.4 20H20l-7.6-9.9L19.8 4h-2.2l-5.6 5.8L7 4H4z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="app-social__link" href="https://www.facebook.com/VancityReynolds" aria-label="Facebook" target="_blank" rel="noopener">
+                    <span class="app-social__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v3.5H8V21h3.5v-7.5h2.7l.5-3.5h-3.2V7.8c0-1 .3-1.7 1.7-1.7H15V3z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="app-social__link" href="https://www.youtube.com/@VancityReynolds" aria-label="YouTube" target="_blank" rel="noopener">
+                    <span class="app-social__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2.5" y="6" width="19" height="12" rx="3.5" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="app-social__link" href="https://www.tiktok.com/@vancityreynolds" aria-label="TikTok" target="_blank" rel="noopener">
+                    <span class="app-social__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 3c.3 2.2 2 4 4.5 4.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <aside class="promo-card" aria-labelledby="promo-card-title">
+              <span class="promo-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 8.5l3.2 2.6L12 5l4.8 6.1L20 8.5 18.6 18H5.4L4 8.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                  <path d="M5.4 18h13.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <p class="promo-card__eyebrow">Active Member Area</p>
+              <h2 id="promo-card-title" class="promo-card__title">Get Your Membership Card</h2>
+              <p class="promo-card__text">
+                Contact our team support via Gmail or Telegram to receive your membership card and become an Active Member of the fan club, unlocking messaging, reactions and full community access.
+              </p>
+              <div class="promo-card__actions">
+                <a class="button button--auth-google button--block" href="mailto:support@teamreynolds.club">
+                  <span class="button__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="#4285F4" d="M22.5 12.23c0-.82-.07-1.42-.22-2.05H12v3.72h6c-.12 1-.77 2.5-2.22 3.51l-.02.13 3.22 2.5.22.02c2.05-1.89 3.3-4.68 3.3-7.83z"/>
+                      <path fill="#34A853" d="M12 23c3 0 5.52-.99 7.36-2.69l-3.22-2.5c-.86.6-2.02 1.02-4.14 1.02-3.16 0-5.84-2.09-6.79-4.98l-.13.01-3.34 2.58-.04.12C3.5 20.42 7.44 23 12 23z"/>
+                      <path fill="#FBBC05" d="M5.21 13.85A6.9 6.9 0 0 1 4.85 12c0-.64.11-1.27.34-1.85l-.01-.13-3.38-2.62-.11.05A11 11 0 0 0 1 12c0 1.78.43 3.46 1.19 4.95l3.02-2.1z"/>
+                      <path fill="#EA4335" d="M12 5.88c2.09 0 3.5.9 4.31 1.66l2.94-2.87C17.51 3.05 15 2 12 2 7.44 2 3.5 4.58 1.5 8.05l3.19 2.1C5.66 7.97 8.34 5.88 12 5.88z"/>
+                    </svg>
+                  </span>
+                  Get in touch via Gmail
+                </a>
+                <a class="button button--auth-telegram button--block" href="https://t.me/teams_reynolds" target="_blank" rel="noopener noreferrer">
+                  <span class="button__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M21.4 3.6L2.9 10.9c-.9.35-.9.98-.02 1.28l4.7 1.5 1.8 5.6c.22.6.4.66.83.32l2.6-2 4.6 3.4c.62.4 1.07.2 1.24-.55l3.44-16.3c.24-.9-.35-1.35-1.09-1.03z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                  Get in touch via Telegram
+                </a>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- ============================================================
+         CONTENU PRINCIPAL
+    ============================================================= -->
+    <main class="app-main thin-scroll">
+
+      <!-- ---------- Hero ---------- -->
+      <section class="hero">
+        <div class="hero__content">
+          <p class="hero__eyebrow">Membership Card</p>
+          <h1 class="hero__title page-title">Your all-access pass to the fan club.</h1>
+          <p class="hero__subtitle">
+            One card, every benefit: private events, exclusive gifts and a
+            recognized place in the community.
+          </p>
+          <ul class="hero__stats">
+            <li class="hero__stat">
+              <span class="hero__stat-value">6.8M</span>
+              <span class="hero__stat-label">Active Members</span>
+            </li>
+            <li class="hero__stat">
+              <span class="hero__stat-value">36</span>
+              <span class="hero__stat-label">Exclusive Events</span>
+            </li>
+          </ul>
+        </div>
+        <figure class="hero__media">
+          <img src="/assets/images/fanclub/membership-card.png" alt="Ryan Reynolds Fan Club membership card, showing the member's name and join date on a gold-accented design">
+        </figure>
+      </section>
+
+      <!-- ---------- Everything You Unlock ---------- -->
+      <section class="unlocks" aria-labelledby="unlocks-heading">
+        <header class="section-heading">
+          <p class="section-heading__eyebrow">What's Included</p>
+          <h2 class="section-heading__title" id="unlocks-heading">Everything you unlock.</h2>
+        </header>
+
+        <ul class="unlocks__grid">
+          <li class="feature-card surface-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 5.5h16a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H9l-4 3.3V16H4a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="feature-card__title">Join the Conversation</h3>
+            <p class="feature-card__description">Comment, react and message other verified members.</p>
+          </li>
+          <li class="feature-card surface-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="9.5" width="16" height="10.5" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M4 13.5h16M12 9.5v10.5" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M12 9.5c-1.6-3.3-5-3.3-5-1.1S9 9.5 12 9.5zm0 0c1.6-3.3 5-3.3 5-1.1S15 9.5 12 9.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="feature-card__title">Exclusive Gifts</h3>
+            <p class="feature-card__description">Monthly draws for signed merchandise and collectibles.</p>
+          </li>
+          <li class="feature-card surface-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2.5L4.5 14h5.5l-1 7.5 9-13H12l1-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="feature-card__title">Priority Access</h3>
+            <p class="feature-card__description">First in line for tickets, screenings and drops.</p>
+          </li>
+          <li class="feature-card surface-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="feature-card__title">Official Member Badge</h3>
+            <p class="feature-card__description">A verified mark on your profile and comments.</p>
+          </li>
+          <li class="feature-card surface-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4.5" width="18" height="16" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M3 9.5h18" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M8 2.5v4M16 2.5v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3 class="feature-card__title">Private Events</h3>
+            <p class="feature-card__description">Invitations to member-only meetups and premieres.</p>
+          </li>
+          <li class="feature-card surface-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3.5l2.47 5.18 5.53.62-4.1 3.85 1.14 5.55L12 15.9l-4.94 2.8 1.14-5.55-4.1-3.85 5.53-.62L12 3.5z"/>
+              </svg>
+            </span>
+            <h3 class="feature-card__title">Community Recognition</h3>
+            <p class="feature-card__description">Top Contributor badges and leaderboard placement.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ---------- Testimonials ---------- -->
+      <section class="testimonials" aria-labelledby="testimonials-heading">
+        <header class="section-heading">
+          <p class="section-heading__eyebrow">Member Stories</p>
+          <h2 class="section-heading__title" id="testimonials-heading">What members are saying.</h2>
+        </header>
+
+        <ul class="testimonials__list">
+          <li class="testimonial-card surface-card">
+            <p class="testimonial-card__rating" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="testimonial-card__quote">
+              Thanks to my membership card I got free access to the last premiere, I still can't stop smiling about it.
+            </p>
+            <div class="testimonial-card__author">
+              <span class="avatar-initials avatar-initials--sm avatar-initials--c2 testimonial-card__avatar" aria-hidden="true"><span class="avatar-initials__label">OP</span></span>
+              <div>
+                <p class="testimonial-card__name">Olivia Park</p>
+                <p class="testimonial-card__meta">Active Member since 2021</p>
+              </div>
+            </div>
+          </li>
+          <li class="testimonial-card surface-card">
+            <p class="testimonial-card__rating" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="testimonial-card__quote">
+              I received a surprise gift from Ryan's team last week, I am beyond thrilled to be part of this club.
+            </p>
+            <div class="testimonial-card__author">
+              <span class="avatar-initials avatar-initials--sm avatar-initials--c3 testimonial-card__avatar" aria-hidden="true"><span class="avatar-initials__label">DR</span></span>
+              <div>
+                <p class="testimonial-card__name">Daniel Rodriguez</p>
+                <p class="testimonial-card__meta">Active Member since 2021</p>
+              </div>
+            </div>
+          </li>
+          <li class="testimonial-card surface-card">
+            <p class="testimonial-card__rating" aria-label="5 out of 5 stars">★★★★★</p>
+            <p class="testimonial-card__quote">
+              Free entry to the members-only meet-up, plus a signed gift in the mail: this card pays for itself in memories.
+            </p>
+            <div class="testimonial-card__author">
+              <span class="avatar-initials avatar-initials--sm avatar-initials--c4 testimonial-card__avatar" aria-hidden="true"><span class="avatar-initials__label">SL</span></span>
+              <div>
+                <p class="testimonial-card__name">Sophie Laurent</p>
+                <p class="testimonial-card__meta">Active Member since 2022</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ---------- How to Get Your Card ---------- -->
+      <section class="steps" aria-labelledby="steps-heading">
+        <header class="section-heading">
+          <p class="section-heading__eyebrow">Getting Started</p>
+          <h2 class="section-heading__title" id="steps-heading">Your membership card request</h2>
+        </header>
+
+        <ol class="steps__list">
+          <li class="step-card surface-card">
+            <span class="step-card__number">1</span>
+            <h3 class="step-card__title">Get in touch via Gmail or Telegram</h3>
+            <p class="step-card__description">Use the sidebar to start your membership request.</p>
+          </li>
+          <li class="step-card surface-card">
+            <span class="step-card__number">2</span>
+            <h3 class="step-card__title">Confirm your details</h3>
+            <p class="step-card__description">A quick check keeps the community genuine and safe.</p>
+          </li>
+          <li class="step-card surface-card">
+            <span class="step-card__number">3</span>
+            <h3 class="step-card__title">Choose your card type</h3>
+            <p class="step-card__description">Choose the membership tier that fits your budget — each comes with its own price and perks.</p>
+          </li>
+          <li class="step-card surface-card">
+            <span class="step-card__number">4</span>
+            <h3 class="step-card__title">Complete your enrollment</h3>
+            <p class="step-card__description">Complete secure payment, verified every step of the way with our support team.</p>
+          </li>
+          <li class="step-card surface-card">
+            <span class="step-card__number">5</span>
+            <h3 class="step-card__title">Your card is reviewed and issued</h3>
+            <p class="step-card__description">Our support team verifies your request and assigns your personalized card.</p>
+          </li>
+          <li class="step-card surface-card">
+            <span class="step-card__number">6</span>
+            <h3 class="step-card__title">Start exploring</h3>
+            <p class="step-card__description">Messaging, events and gifts unlock right away.</p>
+          </li>
+        </ol>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../assets/js/supabase-client.js"></script>
+  <script src="assets/js/admin-nav.js"></script>
+  <script src="assets/js/logout.js"></script>
+  <script src="assets/js/shell.js"></script>
+
+</body>
+</html>

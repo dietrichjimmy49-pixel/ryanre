@@ -1,0 +1,78 @@
+{
+  "_comment": "Tous les délais sont en millisecondes. Multiplier speedMultiplier par 0.5 accélère tout de moitié ; 2 ralentit tout de moitié. Aucune de ces valeurs n'est codée en dur dans forum-engine.js — modifier ce fichier suffit à changer le comportement. Cadence relevée en même temps que le roster (24 → 48 membres) : une communauté deux fois plus nombreuse doit se sentir deux fois plus vivante, pas juste plus peuplée sur le papier.",
+
+  "speedMultiplier": 1,
+
+  "typingIndicator": {
+    "minMs": 1200,
+    "maxMs": 3600
+  },
+
+  "newCommentInterval": {
+    "minMs": 4000,
+    "maxMs": 18000
+  },
+
+  "replyProbability": 0.65,
+  "replyDelayAfterComment": {
+    "minMs": 3000,
+    "maxMs": 16000
+  },
+
+  "reactionProbability": 0.72,
+  "reactionCheckInterval": {
+    "minMs": 2500,
+    "maxMs": 7000
+  },
+  "reactionIncrement": {
+    "min": 1,
+    "max": 3
+  },
+
+  "viewCounter": {
+    "intervalMs": { "minMs": 6000, "maxMs": 20000 },
+    "increment": { "min": 2, "max": 9 }
+  },
+
+  "onlineCounter": {
+    "intervalMs": { "minMs": 4000, "maxMs": 14000 },
+    "delta": { "min": -25000, "max": 50000 },
+    "min": 2180000,
+    "max": 5320000
+  },
+
+  "activityRhythm": {
+    "_comment": "Simule un rythme jour/nuit basé sur l'heure LOCALE du navigateur du visiteur (index 0 = minuit, 23 = 23h). Multiplie la fréquence de publication (plus le chiffre est bas, plus les messages se font rares) et redimensionne dynamiquement la fourchette min/max du compteur 'en ligne' de onlineCounter ci-dessus, pour qu'il descende la nuit et remonte en soirée sans jamais dépasser ses bornes d'origine. commentCap/replyCap redimensionnent aussi maxVisibleComments/maxVisibleRepliesPerComment : la nuit, moins de nouveaux messages arrivent mais on en garde davantage affichés (le visiteur voit qu'il y a eu de la vie à lire) ; en heure de pointe, on purge plus vite pour ne pas surcharger la page malgré le flux plus rapide.",
+    "enabled": true,
+    "hourlyMultiplier": [
+      0.32, 0.26, 0.22, 0.22, 0.25, 0.32,
+      0.45, 0.58, 0.72, 0.85, 0.92, 0.97,
+      1.0, 0.96, 0.9, 0.88, 0.94, 1.05,
+      1.18, 1.3, 1.25, 1.1, 0.78, 0.5
+    ],
+    "commentCap": { "min": 6, "max": 24 },
+    "replyCap": { "min": 3, "max": 8 }
+  },
+
+  "maxVisibleComments": 9,
+  "maxVisibleRepliesPerComment": 4,
+
+  "commentFadeInMs": 500,
+  "commentFadeOutMs": 450,
+
+  "autoScrollThresholdPx": 120,
+
+  "startingCounters": {
+    "views": 31240,
+    "replies": 9,
+    "onlineMembers": 4215000
+  },
+
+  "sounds": {
+    "_comment": "Chemins relatifs aux pages HTML. 'enabled' à false coupe tout sans toucher au reste. typingLoop joue en boucle tant qu'un indicateur 'is typing' est visible ; messageSent joue une fois à chaque commentaire/réponse généré (jamais pour le fil de départ).",
+    "enabled": true,
+    "volume": 0.4,
+    "typingLoop": "assets/audio/typing-loop.mp3",
+    "messageSent": "assets/audio/message-sent.mp3"
+  }
+}

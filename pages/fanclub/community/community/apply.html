@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <!-- Empêche le navigateur de proposer/forcer une traduction automatique
+       de la page. translate="no" sur <html> est le standard suivi par la
+       plupart des navigateurs ; le meta "google" ci-dessous cible en plus
+       spécifiquement Google Translate (Chrome), qui ne respecte pas
+       toujours l'attribut seul. -->
+  <meta name="google" content="notranslate">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Reynolds - Fan Club Membership Application</title>
+  <meta name="description" content="Apply for membership to the Ryan Reynolds Fan Club. Every application is personally reviewed: only serious fans are accepted.">
+  <meta name="theme-color" content="#0D0D0D">
+  <link rel="canonical" href="https://www.teamreynolds.club/pages/fanclub/community/community/apply.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ryan Reynolds - Fan Club Membership Application">
+  <meta property="og:description" content="Apply for membership to the Ryan Reynolds Fan Club. Every application is personally reviewed: only serious fans are accepted.">
+  <meta property="og:image" content="https://www.teamreynolds.club/assets/images/shared/logo.png">
+  <meta property="og:url" content="https://www.teamreynolds.club/pages/fanclub/community/community/apply.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="apply.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       Lien de sortie discret — remplace le header complet sur
+       cette page. Reste visible (contraste paper-72 / accent au
+       survol) sans réintroduire une nav concurrente au formulaire.
+  ========================================================== -->
+  <a href="/" class="back-to-site">
+    <span class="back-to-site__arrow" aria-hidden="true">←</span> Back to site
+  </a>
+
+  <!-- Bouton flottant "retour à l'accueil" — masqué en haut de page,
+       révélé au scroll par scroll-home-button.js (voir apply.css pour
+       le style). Compense .back-to-site qui défile maintenant avec la
+       page au lieu de rester fixe. -->
+  <a href="/" class="scroll-home-btn" id="scroll-home-btn" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 11.5 12 4l9 7.5" />
+      <path d="M5.5 9.5V19a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1V9.5" />
+    </svg>
+  </a>
+
+  <main>
+    <!-- =========================================================
+         MEMBERSHIP APPLICATION
+    ========================================================== -->
+    <section class="apply" aria-labelledby="apply-heading">
+      <div class="apply-card">
+
+        <header class="apply-header">
+          <p class="apply-eyebrow">FAN CLUB · APPLICATION</p>
+          <h1 class="apply-title" id="apply-heading">Membership Application</h1>
+          <p class="apply-subtitle">
+            Fill in the form below: every application is personally reviewed. You'll hear back as soon as your request has been processed.
+          </p>
+        </header>
+
+        <form class="apply-form" id="apply-form">
+
+          <!-- Piège à robots (honeypot) : champ invisible pour un humain
+               (masqué visuellement + hors du parcours clavier), mais que
+               les robots qui remplissent tous les champs automatiquement
+               vont renseigner. Si ce champ arrive rempli, on sait que ce
+               n'est pas une vraie personne — voir apply.js. Le nom
+               volontairement "alléchant" (site web) augmente les chances
+               qu'un robot le remplisse sans réfléchir. -->
+          <div class="apply-honeypot" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <fieldset class="apply-group">
+            <legend class="visually-hidden">Applicant identity</legend>
+            <div class="apply-row">
+              <div class="apply-field">
+                <label for="first-name" class="apply-label">First Name *</label>
+                <input type="text" id="first-name" name="first-name" class="apply-input"
+                  placeholder="First Name" autocomplete="given-name" required>
+              </div>
+              <div class="apply-field">
+                <label for="last-name" class="apply-label">Last Name *</label>
+                <input type="text" id="last-name" name="last-name" class="apply-input"
+                  placeholder="Last Name" autocomplete="family-name" required>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="apply-group">
+            <legend class="visually-hidden">Mailing address</legend>
+
+            <div class="apply-field">
+              <label for="address" class="apply-label">Address *</label>
+              <input type="text" id="address" name="address" class="apply-input"
+                placeholder="Address" autocomplete="street-address" required>
+            </div>
+
+            <div class="apply-field">
+              <label for="city" class="apply-label">City *</label>
+              <input type="text" id="city" name="city" class="apply-input"
+                placeholder="City" autocomplete="address-level2" required>
+            </div>
+
+            <div class="apply-row">
+              <div class="apply-field">
+                <label for="state" class="apply-label">State / Province</label>
+                <input type="text" id="state" name="state" class="apply-input"
+                  placeholder="State / Province" autocomplete="address-level1">
+              </div>
+              <div class="apply-field">
+                <label for="zip" class="apply-label">Zip Code *</label>
+                <input type="text" id="zip" name="zip" class="apply-input"
+                  placeholder="Zip Code" autocomplete="postal-code" required>
+              </div>
+            </div>
+
+            <div class="apply-field">
+              <label for="country" class="apply-label">Country *</label>
+              <select id="country" name="country" class="apply-select" autocomplete="country" required>
+                <option value="" selected disabled>Select your country</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="apply-group">
+            <legend class="visually-hidden">Contact details</legend>
+
+            <div class="apply-field">
+              <label for="phone" class="apply-label">Phone Number</label>
+              <input type="tel" id="phone" name="phone" class="apply-input"
+                placeholder="Phone Number" autocomplete="tel">
+            </div>
+
+            <div class="apply-field apply-field--accent">
+              <label for="email" class="apply-label">Email *</label>
+              <input type="email" id="email" name="email" class="apply-input"
+                placeholder="Email Address" autocomplete="email"
+                aria-describedby="email-help" required>
+              <p id="email-help" class="apply-help">
+                You'll use this address, together with the password below, to sign in once your application is approved.
+              </p>
+            </div>
+          </fieldset>
+
+          <fieldset class="apply-group">
+            <legend class="visually-hidden">Account password</legend>
+
+            <div class="apply-field">
+              <label for="password" class="apply-label">Password *</label>
+              <input type="password" id="password" name="password" class="apply-input"
+                placeholder="At least 8 characters" autocomplete="new-password"
+                minlength="8" aria-describedby="password-help" required>
+              <p id="password-help" class="apply-help">
+                Minimum 8 characters. You'll use this to sign in once your application is approved by our support team.
+              </p>
+            </div>
+
+            <div class="apply-field">
+              <label for="password-confirm" class="apply-label">Confirm Password *</label>
+              <input type="password" id="password-confirm" name="password-confirm" class="apply-input"
+                placeholder="Re-enter your password" autocomplete="new-password"
+                minlength="8" required>
+              <p id="password-mismatch" class="apply-help apply-help--error" hidden>
+                Passwords don't match.
+              </p>
+            </div>
+          </fieldset>
+
+          <fieldset class="apply-group">
+            <legend class="visually-hidden">Fan profile</legend>
+
+            <div class="apply-field">
+              <label for="favorite-movie" class="apply-label">Your Favorite Ryan Reynolds Movie</label>
+              <input type="text" id="favorite-movie" name="favorite-movie" class="apply-input"
+                placeholder="Ex: Deadpool, Free Guy, The Proposal..." aria-describedby="favorite-movie-help">
+              <p id="favorite-movie-help" class="apply-help">
+                This helps us personalize your experience.
+              </p>
+            </div>
+
+            <div class="apply-field">
+              <label for="motivation" class="apply-label">Why Do You Want to Join?</label>
+              <textarea id="motivation" name="motivation" class="apply-textarea"
+                placeholder="Tell us a little about yourself and why you want to be part of the Inner Circle..."
+                maxlength="500" aria-describedby="motivation-counter" rows="5" required></textarea>
+              <p id="motivation-counter" class="apply-counter">500 characters maximum.</p>
+            </div>
+          </fieldset>
+
+          <fieldset class="apply-group">
+            <legend class="visually-hidden">Consent</legend>
+            <div class="apply-field apply-field--checkbox">
+              <input type="checkbox" id="consent" name="consent" class="apply-checkbox" required>
+              <label for="consent" class="apply-checkbox-label">
+                I confirm that I am a genuine Ryan Reynolds fan and I accept the
+                community guidelines.
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="apply-actions">
+            <p class="apply-error" id="apply-error" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primary apply-submit">
+              Submit My Application <span class="btn-arrow-icon">→</span>
+            </button>
+            <p class="apply-login">
+              Already a member? <a href="login.html" class="apply-link">Log in</a>
+            </p>
+            <p class="apply-privacy">
+              Your information is kept strictly private. We never share your data.
+            </p>
+          </div>
+
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../assets/js/supabase-client.js"></script>
+  <script src="assets/js/apply.js"></script>
+  <script src="assets/js/scroll-home-button.js"></script>
+
+</body>
+</html>

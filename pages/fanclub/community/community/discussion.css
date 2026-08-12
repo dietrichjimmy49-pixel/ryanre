@@ -1,0 +1,396 @@
+/* ===========================================================================
+   RYAN REYNOLDS FAN CLUB — DISCUSSION
+   ---------------------------------------------------------------------------
+   tokens.css (palette, typo, reset) + shell.css (sidebar, tiroir) +
+   components.css (bouton, badge, carte, mention d'accès) chargés avant ce
+   fichier. Il ne reste ici que ce qui est propre au fil de discussion :
+   le bloc auteur, le commentaire, la réponse imbriquée, et la barre de
+   composition fixe en bas d'écran.
+   ========================================================================= */
+
+/* .app-main reçoit un padding-bottom qui réserve exactement la hauteur
+   réelle de la composer-bar (mesurée en JS, voir assets/js/composer-bar.js)
+   + une respiration visible de 28px. Avant : une valeur fixe (112px, 140px
+   sur mobile) qui ne correspondait plus à la vraie hauteur de la barre dès
+   qu'elle passait sur plusieurs lignes — d'où l'absence d'espace visible
+   en bas de fil sur certains formats. */
+:root {
+  --composer-bar-height: 96px;
+  --composer-bar-gap: 28px;
+}
+
+.app-main--discussion {
+  padding-bottom: calc(var(--composer-bar-height) + var(--composer-bar-gap));
+}
+
+/* --------------------------------------------------------------------------
+   BARRE DE STATISTIQUES DU FIL — vues / réponses / membres en ligne,
+   toutes trois animées en direct par forum-engine.js
+   -------------------------------------------------------------------------- */
+
+.thread-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-paper-45);
+}
+
+.thread-stats__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.thread-stats__dot {
+  color: var(--color-accent);
+  opacity: 0.7;
+  font-size: 8px;
+}
+
+.thread-stats__online-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-online);
+  box-shadow: 0 0 8px 1px rgba(59, 165, 93, 0.6);
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+/* L'indicateur de frappe n'a pas le fond "carte" d'un vrai commentaire :
+   il flotte discrètement, comme une action en cours plutôt qu'un message. */
+.comment-list__item--typing,
+.reply-list__item--typing {
+  padding-left: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   COMPOSANT RÉUTILISABLE — bloc auteur (avatar + identité)
+   -------------------------------------------------------------------------- */
+
+.author {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.author__identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  row-gap: 4px;
+}
+
+.author__name {
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--color-paper);
+}
+
+.author__timestamp {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--color-paper-45);
+}
+
+/* --------------------------------------------------------------------------
+   RÉACTIONS
+   -------------------------------------------------------------------------- */
+
+.reaction-summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.reaction-summary--compact {
+  gap: 14px;
+}
+
+.reaction-summary__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reaction-summary__icon {
+  font-size: 15px;
+  filter: grayscale(0.2);
+}
+
+.reaction-summary__count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-paper-72);
+}
+
+/* --------------------------------------------------------------------------
+   COMMENTAIRE — message racine du fil
+   -------------------------------------------------------------------------- */
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.comment__header {
+  display: flex;
+}
+
+.comment__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment__text {
+  max-width: 680px;
+  font-weight: 400;
+  color: var(--color-paper-72);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.comment__attachment {
+  width: min(220px, 100%);
+}
+
+.comment__attachment-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-paper-10);
+}
+
+.comment__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   RÉPONSE — imbriquée sous un commentaire
+   -------------------------------------------------------------------------- */
+
+.reply-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+  margin-left: 56px; /* aligne sous le texte du parent, pas sous son avatar */
+}
+
+.reply {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-md);
+}
+
+.reply__header {
+  display: flex;
+}
+
+.reply__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reply__text {
+  max-width: 680px;
+  font-weight: 400;
+  color: var(--color-paper-72);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.reply__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   COMPOSER-BAR — barre d'action fixe, pleine largeur, superposée
+   -------------------------------------------------------------------------- */
+
+.composer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 32px;
+  z-index: 10;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--color-paper-10);
+}
+
+.composer-bar__form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 260px;
+}
+
+.composer-bar__input {
+  flex: 1 1 0%;
+  height: 44px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-paper-10);
+  border-radius: var(--radius-md);
+  color: var(--color-paper);
+  font-size: 14px;
+  padding: 0 20px;
+}
+
+.composer-bar__input::placeholder {
+  color: var(--color-paper-45);
+}
+
+.composer-bar__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.composer-bar__lock-icon,
+.composer-bar__crown-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+}
+
+.composer-bar__crown-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.composer-bar__lock-icon svg,
+.composer-bar__crown-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.composer-bar__notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--color-paper-45);
+}
+
+.composer-bar__auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 0 1 auto;
+}
+
+.composer-bar__auth-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.composer-bar__auth-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-paper);
+}
+
+.composer-bar__auth-subtitle {
+  font-size: 11px;
+  color: var(--color-paper-45);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — propre à cette page (le sidebar/tiroir est géré par shell.css)
+
+   Philosophie : sous 1024px, la barre n'essaie plus de faire tenir trois
+   messages redondants ("champ verrouillé" + "notice" + "invite à rejoindre")
+   sur une ligne qui finit par déborder sur plusieurs — elle ne garde que
+   l'invite à rejoindre, seule information qui compte une fois qu'on sait
+   déjà qu'on ne peut pas écrire. En dessous de 640px, les deux boutons
+   passent en pleine largeur, empilés : sur téléphone, une seule main doit
+   pouvoir les atteindre confortablement.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .reply-list {
+    margin-left: 24px;
+  }
+
+  .composer-bar__form,
+  .composer-bar__notice {
+    display: none;
+  }
+
+  .composer-bar {
+    height: auto;
+    justify-content: center;
+    padding: 18px 24px calc(18px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .composer-bar__auth {
+    width: 100%;
+    max-width: 480px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .composer-bar__auth {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .composer-bar__crown-icon {
+    align-self: center;
+  }
+
+  .composer-bar__auth-text {
+    align-items: center;
+    text-align: center;
+  }
+
+  .composer-bar__auth-subtitle {
+    max-width: 34ch;
+  }
+
+  .composer-bar__auth .button {
+    width: 100%;
+  }
+}
