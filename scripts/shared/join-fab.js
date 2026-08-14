@@ -18,11 +18,14 @@
     var link = document.getElementById("join-fab");
     if (!link || typeof SupabaseDB === "undefined") return;
 
+    var labelEl = link.querySelector(".join-fab__label");
+
     try {
       var session = await SupabaseDB.getSession();
       if (session) {
         link.href = "/pages/fanclub/community/community/discussion.html";
         link.setAttribute("aria-label", "Go to the community");
+        if (labelEl) labelEl.textContent = "Profile";
       }
     } catch (err) {
       console.error("[join-fab] Could not check session:", err);

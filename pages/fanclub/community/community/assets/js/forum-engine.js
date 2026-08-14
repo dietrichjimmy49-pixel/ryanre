@@ -391,7 +391,11 @@
     li.className = "reply-list__item";
     li.appendChild(article);
 
+    const wasNearBottom = isNearBottom(els.mainScroll);
     commentEntry.replyListEl.appendChild(li);
+    if (wasNearBottom) {
+      els.mainScroll.scrollTop = els.mainScroll.scrollHeight;
+    }
 
     commentEntry.replies.push({
       id: replyData.id,
@@ -519,6 +523,9 @@
     li.appendChild(typingEl);
     commentEntry.replyListEl.appendChild(li);
     startTypingSound();
+    if (isNearBottom(els.mainScroll)) {
+      els.mainScroll.scrollTop = els.mainScroll.scrollHeight;
+    }
 
     await sleep(scaledDelay(config.typingIndicator));
     li.remove();
